@@ -85,3 +85,18 @@ weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
 dotfiles were an easy way to get into bash customization, and then to jump ship
 to zsh a bit later. A decent amount of the code in these dotfiles stem or are
 inspired from Ryan's original project.
+
+# Browser Extensions
+
+Installing Chrome extensions [appears possible](https://support.google.com/chrome/a/answer/187948?visit_id=637892850139741739-4179064981&rd=1), but a PIA.
+
+## Recommended Google Chrome Extensions
+- [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
+- [Snowplow Analytics Debugger](https://chrome.google.com/webstore/detail/snowplow-analytics-debugg/jbnlcgeengmijcghameodeaenefieedm)
+- [Tag Assistant Companion](https://chrome.google.com/webstore/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm)
+- [Droplr](https://chrome.google.com/webstore/detail/screenshot-screen-recorde/oncaapliomaamlbopdmhmdompfemljhm)
+- [Tab Modifier](https://chrome.google.com/webstore/detail/tab-modifier/hcbgadmbdkiilgpifjgcakjehmafcjai)
+
+# @todo
+
+[ ] [Install VS Code extensions](https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line)

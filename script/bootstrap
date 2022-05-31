@@ -28,9 +28,9 @@ fail () {
 }
 
 setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
-  then
-    info 'setup gitconfig'
+  info 'setup gitconfig'
+
+  if ! [ -f git/gitconfig.local.symlink ]; then
 
     git_credential='cache'
     if [ "$(uname -s)" == "Darwin" ]
@@ -38,14 +38,16 @@ setup_gitconfig () {
       git_credential='osxkeychain'
     fi
 
-    user ' - What is your github author name?'
+    user ' - What is your Github author name?'
     read -e git_authorname
-    user ' - What is your github author email?'
+    user ' - What is your Github author email?'
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
 
     success 'gitconfig'
+  else
+    success 'gitcofig already setup'
   fi
 }
 
@@ -137,10 +139,16 @@ install_dotfiles () {
   done
 }
 
+create_code_directory () {
+  mkdir -p "${HOME}/Code"
+}
+
+cat script/banner.txt
+create_code_directory
 setup_gitconfig
 install_dotfiles
 
-# If we're on a Mac, let's install and setup homebrew.
+If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"
