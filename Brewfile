@@ -3,6 +3,7 @@
 
 # Taps
 tap 'homebrew/cask-fonts'
+tap 'romkatv/powerlevel10k'
 
 # Formulae
 brew 'curl'                       # https://curl.se/

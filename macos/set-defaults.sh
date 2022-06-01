@@ -17,7 +17,7 @@
 ###############################################################################
 #Keep the desktop clean. Put screenshots in a sub-dir.
 mkdir -p "${HOME}/Screenshots"
-defaults write com.apple.screencapture location -string "${HOME}/Screenshots" && killallSystemUIServer
+defaults write com.apple.screencapture location -string "${HOME}/Screenshots" && killall SystemUIServer
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -51,7 +51,7 @@ defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show the ~/Library folder
-chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+chflags nohidden ${HOME}/Library
 
 # Show a few different volumes on the Desktop.
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
