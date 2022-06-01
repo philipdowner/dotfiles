@@ -82,15 +82,15 @@ cask 'cyberduck'
 # FONTS
 # brew search --casks /font-/ | less
 #-------------------------------------------
-cask font-meslo-for-powerline
-cask font-jetbrains-mono
-cask font-fira-code
+cask 'font-meslo-for-powerline'
+cask 'font-jetbrains-mono'
+cask 'font-fira-code'
 
 #-------------------------------------------
 # QuickLook Extensions
 #-------------------------------------------
-cask qlcolorcode     #QL Syntax Highligher
-cask qlmarkdown      #QL Markdown files
-cask quicklook-json  #QL JSON files
-cask quicklook-csv   #QL CSV files
-cask WebPQuickLook   #WebP files
+cask 'qlcolorcode'     #QL Syntax Highligher
+cask 'qlmarkdown'      #QL Markdown files
+cask 'quicklook-json'  #QL JSON files
+cask 'quicklook-csv'   #QL CSV files
+cask 'WebPQuickLook'   #WebP files

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #-------------------------------------------
 # Oh My ZSH
 # https://github.com/ohmyzsh/ohmyzsh/
