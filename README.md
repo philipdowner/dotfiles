@@ -14,7 +14,7 @@ If you're on a brand new Mac, there's very little to worry about. Cheers!
 
 1. Clone this repository into your home directory. `git clone https://github.com/eezyinc/qa-dotfiles.git ~/.dotfiles`
 1. Switch to your new dotfiles directory. `cd ~/.dotfiles`
-1. Run the install script. `script/install.sh`
+1. Run the install script. `script/bootstrap`
 
 This will symlink the appropriate files in `.dotfiles` to your home directory. Everything is configured and tweaked within `~/.dotfiles`.
 
@@ -27,7 +27,7 @@ The main file you'll want to change right off the bat is `zsh/zshrc.symlink`, wh
 There are some things that this script can't do automatically (yet). For convenience we've listed them out below.
 
 ## Selecting an iTerm2 theme
-- A default iTerm theme named `Eezy Default` was installed by this script. You will need to select it in the iTerm preferences pane under `Profiles`.
+- A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Eezy Default`.
 
 ## Recommended Google Chrome Extensions
 - [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
