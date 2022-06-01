@@ -14,11 +14,39 @@ If you're on a brand new Mac, there's very little to worry about. Cheers!
 
 1. Clone this repository into your home directory. `git clone https://github.com/eezyinc/qa-dotfiles.git ~/.dotfiles`
 1. Switch to your new dotfiles directory. `cd ~/.dotfiles`
-1. Run the install script. `script/bootstrap`
+1. Run the bootstrap installation script. `script/bootstrap`
+1. Follow the instructions in your Terminal to complete the installation process.
 
-This will symlink the appropriate files in `.dotfiles` to your home directory. Everything is configured and tweaked within `~/.dotfiles`.
+## Frequently Asked Installer Questions
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`, which sets up a few paths that'll be different on your particular machine.
+### What does the installer do?
+
+Much of the configuration of MacOS and your terminal is handled through files in your home directory. These files often start with a dot - like `.zshrc`. Hence the name "dotfile". You could scour the web, install a bunch of software (some of which will tell you to update a particular dotfile) all on your own. Instead, we want to shortcut that process for you by providing the dotfiles and softare you can actually use right away.
+
+The installation process does the following things:
+1. **Make sure your MacOS software is up to date.** The installer will update your current operating system. This may require a restart of your computer.
+1. **Configure MacOS.** Set opinionated defaults optimized for the QA process, like changing your Screenshots folder and speeding up your key repeat rate.
+1. **Configure Git.** Ensure git recognizes you as an author. Set some sane defaults and helpful aliases.
+1. **Install Apps.** Install all the apps you'll most commonly use. Things like browsers, Slack, screenshot tools, but also command line tools like 1Password-CLI and tree.
+1. **Configure Command Line Apps.** Symlink (that's [a fancy name for creating an alias](https://devdojo.com/devdojo/what-is-a-symlink)) the necessary configuration files from `~/.dotfiles` into your home directory.
+
+### The installer is asking if I want to skip, overwrite or backup files. What does that mean?
+
+In the process of symlinking files, we first check if they exist in our target location. If this is the first time running this script, select `[b]ackup` (typing the lowercase-b) or `[B]ackup all` (typing the uppercase-b). Once files are symlinked you will not be prompted to repeat this.
+
+### Why is the installer asking for my computer password?
+
+One of the first steps the installation script takes is to ensure your system software is up to date. This command requires that you input your computer password into your terminal. When you type your password, no characters will be displayed. This is normal. Just hit enter after you've typed it in!
+
+### Is it OK to run the installer more than once?
+
+Yes. A great example of this is after your system software is updated. Just go back into the Terminal, and start at step 2 of the installation instructions. There's no need to re-clone this repository.
+
+### What can I change?
+
+After installation anything you want to change or tweak will be done in `~/.dotfiles`. Because that directory originated as a Git repository, everything is nicely version controlled.
+
+The main file you'll want to change right off the bat is `zsh/zshrc.symlink`, which sets up a few paths that'll be different on your particular machine. For example the `~/Code` directory.
 
 `dot` is a simple script that installs some dependencies, sets sane macOS defaults, and so on. Tweak this script, and occasionally run `dot` from time to time to keep your environment fresh and up-to-date. You can find this script in `bin/`.
 
