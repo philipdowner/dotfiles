@@ -48,6 +48,10 @@ Yes. A great example of this is after your system software is updated. Just go b
 
 There are some things that this script can't do automatically (yet). For convenience we've listed them out below.
 
+## Opening apps for the first time
+
+Many newly downloaded applications will prompt you with a security setting when you open them the first time. This is expected. [Read the docs](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) for more information.
+
 ## Selecting an iTerm2 theme
 - A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Eezy Default`.
 
@@ -57,9 +61,6 @@ There are some things that this script can't do automatically (yet). For conveni
 - [Tag Assistant Companion](https://chrome.google.com/webstore/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm)
 - [Droplr](https://chrome.google.com/webstore/detail/screenshot-screen-recorde/oncaapliomaamlbopdmhmdompfemljhm)
 - [Tab Modifier](https://chrome.google.com/webstore/detail/tab-modifier/hcbgadmbdkiilgpifjgcakjehmafcjai)
-
-## Recommended VS Code Extensions
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 ## Frequently Asked Post-Installation Questions
 
@@ -73,11 +74,7 @@ Dotfiles are very much meant for customization. If you plan to customize these s
 
 ## Topical Structure
 
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "node" — you can simply add a `node` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
+Everything's built around topic areas. If you're adding a new area to your forked dotfiles — say, "node" — you can simply add a `node` directory and put files in there. Anything with an extension of `.zsh` will get automatically included into your shell. Anything with an extension of `.symlink` will get symlinked without extension into `$HOME` when you run `script/bootstrap`.
 
 ## What's inside
 
@@ -102,8 +99,11 @@ I want this to work for everyone. If you run into any blockers, please [open an 
 
 ## @todo
 
-- [ ] [Install VS Code extensions programatically](https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line)
-- [x] Automatically configure iTerm via Dynamic Profiles
+- [ ] Consider replacing/aliasing `tree` to [broot](https://dystroy.org/broot/)
+- [x] Better git difftool like [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
+- [x] Add CodeOwners file
+- [x] [Install VS Code extensions programatically](https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line)
+- [x] Setup a sane [editorConfig file](https://editorconfig.org/)
 
 ## Browser Extensions
 
