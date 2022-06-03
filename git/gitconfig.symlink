@@ -1,23 +1,30 @@
 # Local/private config goes in the include
-[include]
-        path = ~/.gitconfig.local
 [hub]
         protocol = https
-[alias]
-        co = checkout
-        promote = !$DOTFILES/bin/git-promote
-        wtf     = !$DOTFILES/bin/git-wtf
-        rank-contributors = !$DOTFILES/bin/git-rank-contributors
-        count   = !git shortlog -sn
-        amend   = commit --amend --no-edit
 [color]
         diff = auto
         status = auto
         branch = auto
         ui = true
+[color "diff"]
+        meta = "11"
+        frag = "magenta bold"
+        func = "146 bold"
+        commit = "yellow bold"
+        old = "red bold"
+        new = "green bold"
+        whitespace = "red reverse"
+[color "diff-highlight"]
+        oldNormal = "red bold"
+        oldHighlight = "red bold 52"
+        newNormal = "green bold"
+        newHighlight ="green bold 22"
 [core]
         excludesfile = ~/.gitignore
         editor = code --wait
+        pager = "diff-so-fancy | less --tabs=4 -RFX"
+[interactive]
+        diffFilter = "diff-so-fancy --patch"
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -34,3 +41,63 @@
         default = simple
 [credential]
 	helper = osxkeychain
+[alias]
+        # DOTFILES Functions
+        promote = !$DOTFILES/bin/git-promote
+        wtf     = !$DOTFILES/bin/git-wtf
+        rank-contributors = !$DOTFILES/bin/git-rank-contributors
+
+        # Branch
+        branch-cleanup = "!git fetch origin --prune && git branch --merged origin/master | grep -v 'master$' | xargs git branch -d" # Delete local branches that have been merged to origin
+
+        # Checkout
+        co = "checkout"
+        cob = "checkout -b" # Checkout and create a new branch
+        ours = "!f() { git checkout --ours $@ && git add $@; }; f" # Checkout our version of a file and add it
+	theirs = "!f() { git checkout --theirs $@ && git add $@; }; f" # Checkout their version of a file and add it
+
+        # Commit
+        c = "commit -m" # Commit with message
+        ac = "!git add -p && git commit -m " # add and commit
+        amend   = "commit --amend --no-edit"
+
+        #Diff
+	code-review = "difftool origin/master..." # Fire up your difftool (e.g. Kaleidescope) with all the changes that are on the current branch.
+        diffc = "diff --cached" # Show changes that have been staged
+        dsf = "diff --color"
+
+        # Fetch
+	fr = "!git fetch && git rebase" # fetch and rebase current branch
+	
+	# Log
+	logs = "log --pretty=format:'%C(yellow)%h%C(red)%d %C(reset)%s %Cgreen(%cr) %C(bold blue) <%cn>' --decorate --abbrev-commit" #Short one line log output
+	logl = "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" #Long log with branch graph
+        logstat = "log --pretty=format:'%C(yellow)%h%Cred%d %Creset%s%Cgreen [%cn]' --decorate --numstat" # Log with number of additions/deletions for each affected file
+        count = "!git shortlog -sn" # Count the number of commits from each contributor in the repo
+
+        # Merge
+        merge-diff = "!git diff `git merge-span ... $1`" # Show the changes that were introduced by a merge
+        merge-difftool = "!git difftool `git merge-span ... $1`" # As above, but in your difftool
+        merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f" # Given a merge commit, find the span of commits that exist(ed) on that branch. Again, not so useful in itself, but used by other aliases.
+        merge-log = "!git log `git merge-span .. $1`" # Find the commits that were introduced by a merge
+
+        # Push
+	publish = "!git push -u origin $(git branch --show-current)" # Push the current branch to the remote "origin", and set it to track the upstream branch
+        unpublish = "!git push origin :$(git branch --show-current)" # Delete the remote version of the current branch
+
+        # Rebase
+        rebase-branch = "!git rebase -i `git merge-base master HEAD`" # Interactively rebase all the commits on the current branch
+
+        # Reset
+        unstage = "reset HEAD" # Unstage any files that have been added to the staging area
+        head = "reset --hard HEAD" #Hard reset to latest commit
+
+        # Status
+        s = "status -sb"
+
+	# Update Index
+	assume = "update-index --assume-unchanged" # Mark a file as "assume unchanged", which means that Git will treat it as though there are no changes to it even if there are. Useful for temporary changes to tracked files
+	unassume = "update-index --no-assume-unchanged" # Reverse the above
+	assumed = "!git ls-files -v | grep ^h | cut -c 3-" # Show the files that are currently assume-unchanged
+[include]
+        path = ~/.gitconfig.local
