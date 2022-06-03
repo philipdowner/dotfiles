@@ -17,6 +17,8 @@ If you're on a brand new Mac, there's very little to worry about. Cheers!
 1. Run the bootstrap installation script. `script/bootstrap`
 1. Follow the instructions in your Terminal to complete the installation process.
 
+After completion, you should follow the [post-installation steps](#post-installation) detailed below.
+
 ## Frequently Asked Installer Questions
 
 ### What does the installer do?
@@ -42,14 +44,6 @@ One of the first steps the installation script takes is to ensure your system so
 
 Yes. A great example of this is after your system software is updated. Just go back into the Terminal, and start at step 2 of the installation instructions. There's no need to re-clone this repository.
 
-### What can I change?
-
-After installation anything you want to change or tweak will be done in `~/.dotfiles`. Because that directory originated as a Git repository, everything is nicely version controlled.
-
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`, which sets up a few paths that'll be different on your particular machine. For example the `~/Code` directory.
-
-`dot` is a simple script that installs some dependencies, sets sane macOS defaults, and so on. Tweak this script, and occasionally run `dot` from time to time to keep your environment fresh and up-to-date. You can find this script in `bin/`.
-
 # Post-Installation
 
 There are some things that this script can't do automatically (yet). For convenience we've listed them out below.
@@ -66,6 +60,12 @@ There are some things that this script can't do automatically (yet). For conveni
 
 ## Recommended VS Code Extensions
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+## Frequently Asked Post-Installation Questions
+
+### What can I change?
+
+After installation anything you want to change or tweak will be done in `~/.dotfiles`. Because that directory originated as a Git repository, everything is nicely version controlled. However, you should really consider forking this parent repository to ensure that you can version your own changes!
 
 # Customizing and extending dotfiles
 
