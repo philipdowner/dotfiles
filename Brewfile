@@ -14,8 +14,6 @@ brew 'tldr'                       # https://tldr.sh/
 brew 'coreutils'                  # https://www.gnu.org/software/coreutils
 brew 'git'
 brew 'github-keygen'              # https://github.com/dolmen/github-keygen
-brew 'node'
-brew 'yarn'
 brew 'romkatv/powerlevel10k/powerlevel10k'
 brew 'zsh-syntax-highlighting'
 
