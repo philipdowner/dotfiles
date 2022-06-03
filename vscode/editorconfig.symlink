@@ -1,0 +1,15 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{html,js,jsx,json,md,svg}]
+indent_size = 4
+
+[*.{scss,less,css}]
+indent_size = 2
