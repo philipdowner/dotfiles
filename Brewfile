@@ -27,6 +27,7 @@ cask 'visual-studio-code'                    # https://code.visualstudio.com/doc
 # Git Version Control
 #-------------------------------------------
 brew 'git'
+brew 'gh'                                    # https://cli.github.com/manual/gh - Github CLI
 brew 'diff-so-fancy'                         # https://github.com/so-fancy/diff-so-fancy
 brew 'github-keygen'                         # https://github.com/dolmen/github-keygen
 

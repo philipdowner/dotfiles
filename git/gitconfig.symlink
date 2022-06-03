@@ -1,6 +1,7 @@
 # Local/private config goes in the include
 [hub]
         protocol = https
+        editor = "code --wait"
 [color]
         diff = auto
         status = auto
@@ -82,8 +83,12 @@
         merge-log = "!git log `git merge-span .. $1`" # Find the commits that were introduced by a merge
 
         # Push
+        phead = "git push origin HEAD"
 	publish = "!git push -u origin $(git branch --show-current)" # Push the current branch to the remote "origin", and set it to track the upstream branch
         unpublish = "!git push origin :$(git branch --show-current)" # Delete the remote version of the current branch
+
+        # Pull
+        pullp = "git pull --prune"
 
         # Rebase
         rebase-branch = "!git rebase -i `git merge-base master HEAD`" # Interactively rebase all the commits on the current branch
