@@ -56,11 +56,18 @@ Many newly downloaded applications will prompt you with a security setting when 
 - A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Eezy Default`.
 
 ## Recommended Google Chrome Extensions
-- [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa)
-- [Snowplow Analytics Debugger](https://chrome.google.com/webstore/detail/snowplow-analytics-debugg/jbnlcgeengmijcghameodeaenefieedm)
-- [Tag Assistant Companion](https://chrome.google.com/webstore/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm)
-- [Droplr](https://chrome.google.com/webstore/detail/screenshot-screen-recorde/oncaapliomaamlbopdmhmdompfemljhm)
-- [Tab Modifier](https://chrome.google.com/webstore/detail/tab-modifier/hcbgadmbdkiilgpifjgcakjehmafcjai)
+- [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa) - Easily sign in to sites, generate passwords, and store secure information.
+- [Snowplow Analytics Debugger](https://chrome.google.com/webstore/detail/snowplow-analytics-debugg/jbnlcgeengmijcghameodeaenefieedm) - Debug your Snowplow Analytics implementation.
+- [Tag Assistant Companion](https://chrome.google.com/webstore/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm) - Works with Tag Assistant to help troubleshoot installation of gtag.js and Google Tag Manager.
+- [Droplr](https://chrome.google.com/webstore/detail/screenshot-screen-recorde/oncaapliomaamlbopdmhmdompfemljhm) - Capture screenshots and screen recordings instantly.
+- [Tab Modifier](https://chrome.google.com/webstore/detail/tab-modifier/hcbgadmbdkiilgpifjgcakjehmafcjai) - Automate your tabs, rename tabs based on rules.
+- [OneTab](https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall?hl=en) - Save up to 95% memory and reduce tab clutter.
+- [Spectrum](https://chrome.google.com/webstore/detail/spectrum/ofclemegkcmilinpcimpjkfhjfgmhieb) - Instantly test your web page with different types of color vision deficiency.
+- [TestRail Helper](https://chrome.google.com/webstore/detail/testrail-helper/bomfcmedmmolncpeaaikehdgcccjllaf?hl=en) - Expands all Actual Results and can add a comment with expected details.
+- [Check My Links](https://chrome.google.com/webstore/detail/check-my-links/ojkcdipcgfaekbeaelaapakgnjflfglf) - Crawls through your webpage and looks for broken links.
+- [Ranorex Selocity](https://chrome.google.com/webstore/detail/ranorex-selocity/ocgghcnnjekfpbmafindjmijdpopafoe) - Rapidly generate selectors for use in automation
+- [BugMagnet](https://chrome.google.com/webstore/detail/bug-magnet/efhedldbjahpgjcneebmbolkalbhckfi) - Exploratory testing assistant. Open source and customizable.
+- [FakeFiller](https://chrome.google.com/webstore/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo) - A form filler that fills all inputs on a page with fake/dummy data.
 
 ## Frequently Asked Post-Installation Questions
 
