@@ -1,9 +1,9 @@
 {
   "Profiles": [
     {
-      "Guid" : "github.com/eezyinc/qa-developer-environment",
-      "Name" : "Eezy Default",
-      "Description" : "Eezy Default iTerm Profile",
+      "Guid" : "github.com/philipdowner/dotfiles",
+      "Name" : "Dotfiles Default",
+      "Description" : "Default iTerm Profile for Philip Downer",
       "Normal Font" : "MesloLGS-NF-Regular 14",
       "Rows" : 15,
       "Blinking Cursor" : true,

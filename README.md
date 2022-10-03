@@ -1,10 +1,10 @@
-# QA Engineer Dotfiles
+# Philip Downer Dotfiles
 
 This repository allows you to install all the tools you'll need to setup a QA engineer environment on your brand new Mac. It is also safe to run this on your previously set-up Mac, with the expectation that it will change some of your system settings. Each action it performs is intended to be non-destructive and you will be prompted before anything is overwritten.
 
 # :warning: A word of warning
 
-While I've done everything I can to ensure that this script is non-destructive, it does make some very opinionated decisions about how your Mac should be set up. You may wish to browse the [macos/set-defaults.sh](https://github.com/eezyinc/qa-dotfiles/blob/master/macos/set-defaults.sh) file to get more familiar with the preferences that will be changed.
+While I've done everything I can to ensure that this script is non-destructive, it does make some very opinionated decisions about how your Mac should be set up. You may wish to browse the [macos/set-defaults.sh](https://github.com/philipdowner/dotfiles/blob/master/macos/set-defaults.sh) file to get more familiar with the preferences that will be changed.
 
 The other area this script will modify is your configuration files. These are located in your home directory and usually look like`.zshrc`. If you've not made any modifications to these files - then you're fine. Otherwise you'll be prompted to backup this/these files during the installation process. They will be placed in the same directory they originated in with the `.backup` suffix appended.
 
@@ -12,7 +12,7 @@ If you're on a brand new Mac, there's very little to worry about. Cheers!
 
 # Installation
 
-1. Clone this repository into your home directory. `git clone https://github.com/eezyinc/qa-dotfiles.git ~/.dotfiles`
+1. Clone this repository into your home directory. `git clone https://github.com/philipdowner/dotfiles.git ~/.dotfiles`
 1. Switch to your new dotfiles directory. `cd ~/.dotfiles`
 1. Run the bootstrap installation script. `script/bootstrap`
 1. Follow the instructions in your Terminal to complete the installation process.
@@ -53,7 +53,7 @@ There are some things that this script can't do automatically (yet). For conveni
 Many newly downloaded applications will prompt you with a security setting when you open them the first time. This is expected. [Read the docs](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) for more information.
 
 ## Selecting an iTerm2 theme
-- A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Eezy Default`.
+- A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Dotfiles Default`.
 
 ## Recommended Google Chrome Extensions
 - [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa) - Easily sign in to sites, generate passwords, and store secure information.
@@ -85,7 +85,7 @@ Everything's built around topic areas. If you're adding a new area to your forke
 
 ## What's inside
 
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser above and see what components may mesh up with you. The best place to start is probably [the Brewfile](https://github.com/eezyinc/qa-dotfiles/blob/master/Brewfile). [Fork this repo](https://github.com/eezyinc/qa-dotfiles/fork), remove what you don't use, and build on what you do use.
+A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser above and see what components may mesh up with you. The best place to start is probably [the Brewfile](https://github.com/philipdowner/dotfiles/blob/master/Brewfile). [Fork this repo](https://github.com/philipdowner/dotfiles/fork), remove what you don't use, and build on what you do use.
 
 ## Components
 
@@ -100,7 +100,7 @@ There's a few special files in the hierarchy.
 
 ## Bugs
 
-I want this to work for everyone. If you run into any blockers, please [open an issue](https://github.com/eezyinc/qa-dotfiles/issues) on this repository and we'll work to get it fixed for you!
+I want this to work for everyone. If you run into any blockers, please open an issue on this repository and I'll work to get it fixed for you!
 
 # Errata and To-Do's
 

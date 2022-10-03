@@ -55,7 +55,6 @@ cask 'discord'
 #-------------------------------------------
 # Notes, Docs, Screen Capture
 #-------------------------------------------
-cask 'slite'                                # https://slite.com/ - Documentation portal and note taking
 cask 'kap'                                  # https://getkap.co/ - Open source screen recorder
 cask 'droplr'                               # https://droplr.com/ - Screen capture sharing platform
 cask 'keycastr'                             # https://github.com/keycastr/keycastr - Show shortcuts and clicks in recordings

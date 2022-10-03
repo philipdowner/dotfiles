@@ -144,7 +144,6 @@ create_code_directory () {
   mkdir -p "${HOME}/Code"
 }
 
-cat script/banner.txt
 create_code_directory
 setup_gitconfig
 install_dotfiles
