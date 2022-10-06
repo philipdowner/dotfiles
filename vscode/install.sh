@@ -4,3 +4,6 @@ code --install-extension Shelex.vscode-cy-helper
 code --install-extension Gruntfuggly.todo-tree
 code --install-extension eamodio.gitlens
 code --install-extension streetsidesoftware.code-spell-checker
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension timonwong.shellcheck

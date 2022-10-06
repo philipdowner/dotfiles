@@ -14,6 +14,7 @@ brew 'wget'                                  # https://www.gnu.org/software/wget
 brew 'tree'                                  # http://mama.indstate.edu/users/ice/tree/
 brew 'tldr'                                  # https://tldr.sh/
 brew 'coreutils'                             # https://www.gnu.org/software/coreutils
+brew 'shellcheck'                            # https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/shellcheck.rb
 
 #-------------------------------------------
 # Terminal and IDE
@@ -22,6 +23,7 @@ cask 'iterm2'                                # https://iterm2.com/ - MacOs Termi
 brew 'romkatv/powerlevel10k/powerlevel10k'   # https://github.com/romkatv/powerlevel10k
 brew 'zsh-syntax-highlighting'
 cask 'visual-studio-code'                    # https://code.visualstudio.com/docs
+cask 'dash'                                  # https://kapeli.com/dash - API documentation browser and code snippet manager
 
 #-------------------------------------------
 # Git Version Control
@@ -29,7 +31,7 @@ cask 'visual-studio-code'                    # https://code.visualstudio.com/doc
 brew 'git'
 brew 'gh'                                    # https://cli.github.com/manual/gh - Github CLI
 brew 'diff-so-fancy'                         # https://github.com/so-fancy/diff-so-fancy
-brew 'github-keygen'                         # https://github.com/dolmen/github-keygen
+cask 'kaleidoscope'                          # https://kaleidoscope.app/ - Spot and merge differences in text and image files or folders
 
 #-------------------------------------------
 # Browsers
@@ -56,9 +58,11 @@ cask 'discord'
 # Notes, Docs, Screen Capture
 #-------------------------------------------
 cask 'kap'                                  # https://getkap.co/ - Open source screen recorder
-cask 'droplr'                               # https://droplr.com/ - Screen capture sharing platform
 cask 'keycastr'                             # https://github.com/keycastr/keycastr - Show shortcuts and clicks in recordings
 brew 'asciinema'                            # https://asciinema.org/ - Record your terminal
+cask 'todoist'                              # https://todoist.com/ - To-Do list
+cask 'notion'                               # https://www.notion.so/ - App to write, plan, collaborate, and get organized
+cask 'obsidian'                             # https://obsidian.md/ - Knowledge base that works on top of a local folder of plain text Markdown files
 
 #-------------------------------------------
 # File Storage
@@ -87,6 +91,7 @@ cask 'coffitivity-offline'                  # https://coffitivity.com/ - Ambient
 #-------------------------------------------
 # Dev Tools
 #-------------------------------------------
+cask 'docker'                               # https://www.docker.com/products/docker-desktop - Build and share containerized applications and microservices
 cask 'github'                               # https://desktop.github.com/ - Git GUI
 cask 'postman'                              # https://www.postman.com/ - API testing and exploration software
 cask 'cyberduck'                            # https://cyberduck.io/ - FTP Client
