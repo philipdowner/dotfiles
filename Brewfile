@@ -18,6 +18,7 @@ brew 'coreutils'                             # https://www.gnu.org/software/core
 brew 'shellcheck'                            # https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/shellcheck.rb
 brew 'noti'                                  # https://github.com/variadico/noti - Trigger notifications when a process completes
 brew 'trash'                                 # https://hasseg.org/trash/ - CLI tool that moves files or folder to the trash
+brew 'lorem'                                 # https://github.com/per9000/lorem - Lorem ipsum generator for console
 
 #-------------------------------------------
 # Terminal and IDE
@@ -70,7 +71,8 @@ cask 'obsidian'                             # https://obsidian.md/ - Knowledge b
 #-------------------------------------------
 # File Storage
 #-------------------------------------------
-cask 'google-drive'
+cask 'google-drive'                         # https://www.google.com/drive/ - Client for the Google Drive storage service
+cask 'dropbox'                              # https://www.dropbox.com/ - Client for the Dropbox cloud storage service
 
 #-------------------------------------------
 # Graphics
