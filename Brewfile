@@ -4,6 +4,7 @@
 # Taps
 tap 'homebrew/cask-fonts'
 tap 'romkatv/powerlevel10k'
+tap 'homebrew/cask-versions'
 
 #-------------------------------------------
 # System Utilities
@@ -30,7 +31,7 @@ cask 'dash'                                  # https://kapeli.com/dash - API doc
 #-------------------------------------------
 brew 'git'
 brew 'gh'                                    # https://cli.github.com/manual/gh - Github CLI
-brew 'diff-so-fancy'                         # https://github.com/so-fancy/diff-so-fancy
+brew 'git-delta'                             # https://github.com/dandavison/delta
 cask 'kaleidoscope'                          # https://kaleidoscope.app/ - Spot and merge differences in text and image files or folders
 
 #-------------------------------------------

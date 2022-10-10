@@ -1,44 +1,40 @@
 # Local/private config goes in the include
-[hub]
-        protocol = https
-        editor = "code --wait"
+[add.interactive]
+        useBuiltin = false # git-delta: required for git 2.37.0
+[apply]
+        whitespace = nowarn
 [color]
         diff = auto
         status = auto
         branch = auto
         ui = true
-[color "diff"]
-        meta = "11"
-        frag = "magenta bold"
-        func = "146 bold"
-        commit = "yellow bold"
-        old = "red bold"
-        new = "green bold"
-        whitespace = "red reverse"
-[color "diff-highlight"]
-        oldNormal = "red bold"
-        oldHighlight = "red bold 52"
-        newNormal = "green bold"
-        newHighlight ="green bold 22"
 [core]
         excludesfile = ~/.gitignore
         editor = code --wait
-        pager = "diff-so-fancy | less --tabs=4 -RFX"
-[interactive]
-        diffFilter = "diff-so-fancy --patch"
-[apply]
-        whitespace = nowarn
-[mergetool]
-        keepBackup = false
+        pager = delta
+[delta]
+        navigate = true    # use n and N to move between diff sections
+        light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+        side-by-side = true
+        line-numbers = true
+[diff]
+        colorMoved = default
 [difftool]
         prompt = false
 [help]
         autocorrect = 1
+[hub]
+        protocol = ssh
+        editor = "code --wait"
+[include]
+        path = ~/.gitconfig.local
+[interactive]
+        diffFilter = delta --color-only
+[merge]
+        conflictstyle = diff3
+[mergetool]
+        keepBackup = false
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
         default = simple
 [credential]
 	helper = osxkeychain
@@ -104,5 +100,3 @@
 	assume = "update-index --assume-unchanged" # Mark a file as "assume unchanged", which means that Git will treat it as though there are no changes to it even if there are. Useful for temporary changes to tracked files
 	unassume = "update-index --no-assume-unchanged" # Reverse the above
 	assumed = "!git ls-files -v | grep ^h | cut -c 3-" # Show the files that are currently assume-unchanged
-[include]
-        path = ~/.gitconfig.local
