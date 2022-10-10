@@ -4,7 +4,7 @@
 # Taps
 tap 'homebrew/cask-fonts'
 tap 'romkatv/powerlevel10k'
-tap 'homebrew/cask-versions'
+tap 'philipdowner/homebrew-sketch77'
 
 #-------------------------------------------
 # System Utilities
@@ -74,6 +74,7 @@ cask 'google-drive'
 # Graphics
 #-------------------------------------------
 cask 'inkscape'                             # https://inkscape.org/ - Vector graphics editor
+cask 'sketch@77'                            # https://github.com/philipdowner/homebrew-sketch77 - Sketch app
 
 #-------------------------------------------
 # Music/Video
