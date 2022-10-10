@@ -16,6 +16,8 @@ brew 'tree'                                  # http://mama.indstate.edu/users/ic
 brew 'tldr'                                  # https://tldr.sh/
 brew 'coreutils'                             # https://www.gnu.org/software/coreutils
 brew 'shellcheck'                            # https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/shellcheck.rb
+brew 'noti'                                  # https://github.com/variadico/noti - Trigger notifications when a process completes
+brew 'trash'                                 # https://hasseg.org/trash/ - CLI tool that moves files or folder to the trash
 
 #-------------------------------------------
 # Terminal and IDE
@@ -75,6 +77,8 @@ cask 'google-drive'
 #-------------------------------------------
 cask 'inkscape'                             # https://inkscape.org/ - Vector graphics editor
 cask 'sketch@77'                            # https://github.com/philipdowner/homebrew-sketch77 - Sketch app
+cask 'imageoptim'                           # https://imageoptim.com/mac - Tool to optimize images to a smaller size
+brew 'imageoptim-cli'                       # https://jamiemason.github.io/ImageOptim-CLI/ - CLI for ImageOptim, ImageAlpha and JPEGmini
 
 #-------------------------------------------
 # Music/Video
@@ -97,6 +101,7 @@ cask 'docker'                               # https://www.docker.com/products/do
 cask 'github'                               # https://desktop.github.com/ - Git GUI
 cask 'postman'                              # https://www.postman.com/ - API testing and exploration software
 cask 'cyberduck'                            # https://cyberduck.io/ - FTP Client
+cask 'dbeaver-community'                    # https://dbeaver.io/ - Universal database tool and SQL client
 
 #-------------------------------------------
 # FONTS
