@@ -105,7 +105,9 @@ I want this to work for everyone. If you run into any blockers, please open an i
 # Errata and To-Do's
 
 ## @todo
-
+- [ ] Instead of running MacOS `[softwareupdate](https://ss64.com/osx/softwareupdate.html)` as part [of this script](./macos/install.sh), consider failing (or hard warning) if updates exist at instantiation. This should avoid hung installs due to long-running system software updates.
+- [ ] Check if iTerm2 profile can be sourced from `$DOTFILES` with ability to customize locally.
+- [ ] Detail P10K configuration in docs.
 - [ ] Programatically setup the MacOS doc with preferred apps. [Apple Docs](https://developer.apple.com/documentation/devicemanagement/dock) and [StackOverflow](https://stackoverflow.com/questions/67026378/customize-macoss-dock-with-a-bash-script)
 - [ ] Consider replacing/aliasing `tree` to [broot](https://dystroy.org/broot/)
 - [x] Better git difftool like [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
