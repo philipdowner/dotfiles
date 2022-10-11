@@ -106,7 +106,7 @@ I want this to work for everyone. If you run into any blockers, please open an i
 
 ## @TODO
 - [ ] [Add login message](https://github.com/MikeMcQuaid/strap/blob/master/bin/strap.sh#L218) for lost Mac.
-- [ ] Instead of running MacOS `[softwareupdate](https://ss64.com/osx/softwareupdate.html)` as part [of this script](./macos/install.sh), consider failing (or hard warning) if updates exist at instantiation. This should avoid hung installs due to long-running system software updates.
+- [ ] Instead of running MacOS `[softwareupdate](https://ss64.com/osx/softwareupdate.html)` as part [of this script](./macos/install.sh), consider failing (or hard warning) if updates exist at instantiation. This should avoid hung installs due to long-running system software updates. At minimum run this command before brewing to ensure access to Command Line Tools for Xcode.
 - [ ] Check if iTerm2 profile can be sourced from `$DOTFILES` with ability to customize locally.
 - [ ] Detail P10K configuration in docs.
 - [ ] Programatically setup the MacOS doc with preferred apps. [Apple Docs](https://developer.apple.com/documentation/devicemanagement/dock) and [StackOverflow](https://stackoverflow.com/questions/67026378/customize-macoss-dock-with-a-bash-script)
