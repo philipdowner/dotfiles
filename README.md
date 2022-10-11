@@ -106,6 +106,7 @@ I want this to work for everyone. If you run into any blockers, please open an i
 
 ## @todo
 
+- [ ] Programatically setup the MacOS doc with preferred apps. [Apple Docs](https://developer.apple.com/documentation/devicemanagement/dock) and [StackOverflow](https://stackoverflow.com/questions/67026378/customize-macoss-dock-with-a-bash-script)
 - [ ] Consider replacing/aliasing `tree` to [broot](https://dystroy.org/broot/)
 - [x] Better git difftool like [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
 - [x] Add CodeOwners file
