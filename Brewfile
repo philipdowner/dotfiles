@@ -106,6 +106,12 @@ cask 'cyberduck'                            # https://cyberduck.io/ - FTP Client
 cask 'dbeaver-community'                    # https://dbeaver.io/ - Universal database tool and SQL client
 
 #-------------------------------------------
+# Dev Tools
+#-------------------------------------------
+brew 'php@8.1'                              # https://www.php.net/ - General-purpose scripting language
+brew 'composer'                             # https://getcomposer.org/ - Dependency Manager for PHP
+
+#-------------------------------------------
 # FONTS
 # brew search --casks /font-/ | less
 #-------------------------------------------
