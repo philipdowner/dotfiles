@@ -57,6 +57,8 @@ cask '1password-cli'
 #-------------------------------------------
 cask 'slack'
 cask 'discord'
+cask 'zoom'                                 # https://www.zoom.us/ - Video communication and virtual meeting platform
+cask 'microsoft-teams'                      # https://teams.microsoft.com/downloads - Meet, chat, call, and collaborate in just one place
 
 #-------------------------------------------
 # Notes, Docs, Screen Capture
