@@ -129,3 +129,9 @@ cask 'qlmarkdown'                           # Markdown files
 cask 'quicklook-json'                       # JSON files
 cask 'quicklook-csv'                        # CSV files
 cask 'WebPQuickLook'                        # WebP files
+
+#-------------------------------------------
+# Gaming
+# Because not everything can be work!
+#-------------------------------------------
+cask 'steam'                                # https://store.steampowered.com/about/ - Video game digital distribution service
