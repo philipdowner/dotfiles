@@ -1,0 +1,52 @@
+{
+    "settings": {
+        "enable_new_version_notification": false
+    },
+    "rules": [
+        {
+            "name": "Pinned Gmail",
+            "detection": "STARTS",
+            "url_fragment": "https://mail.google.com/mail/u/0/#inbox",
+            "tab": {
+                "icon": null,
+                "muted": false,
+                "pinned": true,
+                "protected": false,
+                "title": null,
+                "title_matcher": null,
+                "unique": true,
+                "url_matcher": null
+            }
+        },
+        {
+            "name": "Pinned gCal",
+            "detection": "STARTS",
+            "url_fragment": "https://calendar.google.com/",
+            "tab": {
+                "icon": null,
+                "muted": false,
+                "pinned": true,
+                "protected": false,
+                "title": null,
+                "title_matcher": null,
+                "unique": true,
+                "url_matcher": null
+            }
+        },
+        {
+            "name": "Pinned Drive",
+            "detection": "STARTS",
+            "url_fragment": "https://drive.google.com/drive/my-drive",
+            "tab": {
+                "icon": null,
+                "muted": false,
+                "pinned": true,
+                "protected": false,
+                "title": null,
+                "title_matcher": null,
+                "unique": true,
+                "url_matcher": null
+            }
+        }
+    ]
+}
