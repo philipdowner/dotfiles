@@ -8,3 +8,4 @@ code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension timonwong.shellcheck
+code --install-extension deerawan.vscode-dash
