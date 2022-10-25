@@ -36,6 +36,7 @@
         keepBackup = false
 [push]
         default = simple
+        autoSetupRemote = true
 [credential]
 	helper = osxkeychain
 [alias]
@@ -65,7 +66,7 @@
 
         # Fetch
 	fr = "!git fetch && git rebase" # fetch and rebase current branch
-	
+
 	# Log
 	logs = "log --pretty=format:'%C(yellow)%h%C(red)%d %C(reset)%s %Cgreen(%cr) %C(bold blue) <%cn>' --decorate --abbrev-commit" #Short one line log output
 	logl = "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit" #Long log with branch graph
