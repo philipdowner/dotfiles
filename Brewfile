@@ -7,6 +7,11 @@ tap 'romkatv/powerlevel10k'
 tap 'philipdowner/homebrew-sketch77'
 
 #-------------------------------------------
+# Mac App Store
+#-------------------------------------------
+brew 'mas'
+
+#-------------------------------------------
 # System Utilities
 #-------------------------------------------
 brew 'asdf'                                  # https://asdf-vm.com/
@@ -28,6 +33,7 @@ brew 'romkatv/powerlevel10k/powerlevel10k'   # https://github.com/romkatv/powerl
 brew 'zsh-syntax-highlighting'
 cask 'visual-studio-code'                    # https://code.visualstudio.com/docs
 cask 'dash'                                  # https://kapeli.com/dash - API documentation browser and code snippet manager
+mas '497799835'                              # Xcode
 
 #-------------------------------------------
 # Git Version Control

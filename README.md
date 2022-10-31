@@ -105,6 +105,7 @@ I want this to work for everyone. If you run into any blockers, please open an i
 # Errata and To-Do's
 
 ## @TODO
+- [ ] Figure out how to make MacOS text substitution portable. Consider aText as alternative to the failing build for shortcuts. `brew 'rodionovd/taps/shortcuts'             # https://github.com/rodionovd/shortcuts - A CLI manager for your text replacements on macOS`
 - [ ] [Add login message](https://github.com/MikeMcQuaid/strap/blob/master/bin/strap.sh#L218) for lost Mac.
 - [ ] Instead of running MacOS `[softwareupdate](https://ss64.com/osx/softwareupdate.html)` as part [of this script](./macos/install.sh), consider failing (or hard warning) if updates exist at instantiation. This should avoid hung installs due to long-running system software updates. At minimum run this command before brewing to ensure access to Command Line Tools for Xcode.
 - [ ] Check if iTerm2 profile can be sourced from `$DOTFILES` with ability to customize locally.
