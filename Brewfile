@@ -113,9 +113,10 @@ cask 'github'                               # https://desktop.github.com/ - Git 
 cask 'postman'                              # https://www.postman.com/ - API testing and exploration software
 cask 'cyberduck'                            # https://cyberduck.io/ - FTP Client
 cask 'dbeaver-community'                    # https://dbeaver.io/ - Universal database tool and SQL client
+cask 'mysqlworkbench'                       # https://www.mysql.com/products/workbench/ - Visual tool to design, develop and administer MySQL servers
 
 #-------------------------------------------
-# Dev Tools
+# Languages - PHP
 #-------------------------------------------
 brew 'php@8.1'                              # https://www.php.net/ - General-purpose scripting language
 brew 'composer'                             # https://getcomposer.org/ - Dependency Manager for PHP
