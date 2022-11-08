@@ -103,6 +103,7 @@ cask 'rectangle'                            # https://rectangleapp.com/ - Window
 cask 'cheatsheet'                           # https://www.mediaatelier.com/CheatSheet/ - Keyboard shortcut visualizer
 cask 'flycut'                               # https://github.com/TermiT/Flycut - Clean and simple clipboard manager for developers
 cask 'coffitivity-offline'                  # https://coffitivity.com/ - Ambient noise generator
+cask 'alfred'                               # https://www.alfredapp.com/ - Application launcher and productivity software
 
 #-------------------------------------------
 # Dev Tools
