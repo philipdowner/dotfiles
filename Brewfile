@@ -22,7 +22,7 @@ brew 'lorem'                                 # https://github.com/per9000/lorem 
 # Terminal and IDE
 #-------------------------------------------
 cask 'iterm2'                                # https://iterm2.com/ - MacOs Terminal replacement
-brew 'romkatv/powerlevel10k/powerlevel10k'   # https://github.com/romkatv/powerlevel10k
+brew 'powerlevel10k'   # https://github.com/romkatv/powerlevel10k
 brew 'zsh-syntax-highlighting'
 cask 'visual-studio-code'                    # https://code.visualstudio.com/docs
 cask 'dash'                                  # https://kapeli.com/dash - API documentation browser and code snippet manager
