@@ -4,7 +4,6 @@
 # Taps
 tap 'homebrew/cask-fonts'
 tap 'romkatv/powerlevel10k'
-tap 'philipdowner/homebrew-sketch77'
 
 #-------------------------------------------
 # Mac App Store
@@ -14,7 +13,6 @@ brew 'mas'
 #-------------------------------------------
 # System Utilities
 #-------------------------------------------
-brew 'asdf'                                  # https://asdf-vm.com/
 brew 'curl'                                  # https://curl.se/
 brew 'wget'                                  # https://www.gnu.org/software/wget/
 brew 'tree'                                  # http://mama.indstate.edu/users/ice/tree/
@@ -62,7 +60,6 @@ cask '1password-cli'
 # Communication
 #-------------------------------------------
 cask 'slack'
-cask 'discord'
 cask 'zoom'                                 # https://www.zoom.us/ - Video communication and virtual meeting platform
 cask 'microsoft-teams'                      # https://teams.microsoft.com/downloads - Meet, chat, call, and collaborate in just one place
 
@@ -86,7 +83,7 @@ cask 'dropbox'                              # https://www.dropbox.com/ - Client 
 # Graphics
 #-------------------------------------------
 cask 'inkscape'                             # https://inkscape.org/ - Vector graphics editor
-cask 'sketch@77'                            # https://github.com/philipdowner/homebrew-sketch77 - Sketch app
+cask 'figma'                                # https://www.figma.com/ - Graphics editor
 cask 'imageoptim'                           # https://imageoptim.com/mac - Tool to optimize images to a smaller size
 brew 'imageoptim-cli'                       # https://jamiemason.github.io/ImageOptim-CLI/ - CLI for ImageOptim, ImageAlpha and JPEGmini
 
@@ -116,9 +113,14 @@ cask 'dbeaver-community'                    # https://dbeaver.io/ - Universal da
 cask 'mysqlworkbench'                       # https://www.mysql.com/products/workbench/ - Visual tool to design, develop and administer MySQL servers
 
 #-------------------------------------------
+# Languages - JS
+#-------------------------------------------
+brew 'nvm'                                 # https://nodejs.org/
+
+#-------------------------------------------
 # Languages - PHP
 #-------------------------------------------
-brew 'php@8.1'                              # https://www.php.net/ - General-purpose scripting language
+brew 'php@8.3'                              # https://www.php.net/ - General-purpose scripting language
 brew 'composer'                             # https://getcomposer.org/ - Dependency Manager for PHP
 
 #-------------------------------------------

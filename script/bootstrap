@@ -144,10 +144,6 @@ create_code_directory () {
   mkdir -p "${HOME}/Code"
 }
 
-create_code_directory
-setup_gitconfig
-install_dotfiles
-
 #If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
@@ -159,6 +155,10 @@ then
     fail "error installing dependencies"
   fi
 fi
+
+create_code_directory
+setup_gitconfig
+install_dotfiles
 
 echo ''
 echo '  All installed!'
