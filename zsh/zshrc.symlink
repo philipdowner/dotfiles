@@ -1,3 +1,9 @@
+# Optional shell-startup profiler. Run `ZSH_PROFILE=1 zsh -ic exit` to see
+# what's slow; the report is printed by zprof at the end of zshrc.
+if [[ -n "$ZSH_PROFILE" ]]; then
+  zmodload zsh/zprof
+fi
+
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES=$HOME/.dotfiles
 
@@ -60,3 +66,8 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+# Print the profiler report if ZSH_PROFILE was set at startup.
+if [[ -n "$ZSH_PROFILE" ]]; then
+  zprof
+fi

@@ -73,6 +73,27 @@ The installation process does the following things:
 
 In the process of symlinking files, we first check if they exist in our target location. Pick whatever you like — both **overwrite** and **backup** now move the existing file into a timestamped safety directory at `~/.dotfiles-backup/<timestamp>/<original/path>` first, so nothing is ever destroyed. The installer never `rm`s a real file. Once files are symlinked you will not be prompted to repeat this.
 
+### Keeping things up to date
+
+After the first install, `bin/dot` is the one-command maintenance entry point:
+
+```sh
+dot update     # git pull, re-run installers, then upgrade brew/apt + oh-my-zsh
+dot install    # same as `dot` — re-run all installers idempotently
+dot edit       # open the dotfiles dir in $EDITOR (PhpStorm)
+dot help       # show usage
+```
+
+### Profiling shell startup
+
+If your shell starts to feel slow, run:
+
+```sh
+ZSH_PROFILE=1 zsh -ic exit
+```
+
+This loads `zsh/zprof` and prints a per-function timing report at the end of zshrc, so you can see exactly which topic file (or oh-my-zsh plugin) is the culprit. Use [`system/lazy.zsh`](system/lazy.zsh)'s `lazy_load` helper to defer slow initializers (`nvm`, `pyenv`, `direnv`, etc.) until first use.
+
 ### Per-machine config: `~/.localrc`
 
 Anything you don't want committed to this repo (work creds, API tokens, machine-specific `$PATH` entries, hostname-specific tweaks) goes in `~/.localrc`. It's sourced at the very top of `~/.zshrc`, before any topic config. See [`zsh/localrc.example`](zsh/localrc.example) for ideas — including how to combine it with the 1Password CLI to inject secrets at shell-start time without ever writing them to disk:

@@ -1,9 +1,15 @@
 #!/bin/sh
 #
-# dot
+# dot — dotfiles management
 #
-# `dot` handles installation, updates, things like that. Run it periodically
-# to make sure you're on the latest and greatest.
+# Usage:
+#   dot                # same as `dot install`
+#   dot install        # install/refresh everything (idempotent)
+#   dot update         # git pull, then install, then upgrade OS packages
+#   dot edit           # open the dotfiles dir in $EDITOR
+#   dot help           # show this message
+#
+# All subcommands are safe to re-run.
 
 set -e
 
@@ -11,51 +17,77 @@ parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]:-$0}" )" && pwd -P)"
 dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
 export DOTFILES="$dotfilesDirectory"
 
-displayUsageAndExit() {
-	echo "dot -- dotfiles management"
-	echo ""
-	echo "Usage: dot [options]"
-	echo ""
-	echo "Options:"
-	echo "  -e, --edit    Open dotfiles directory for editing"
-	echo "  -h, --help    Show this help message and exit"
-	exit
-}
-
-while test $# -gt 0; do
-	case "$1" in
-		"-h"|"--help")
-			displayUsageAndExit
-			;;
-		"-e"|"--edit")
-			exec "$EDITOR" "$dotfilesDirectory"
-			exit
-			;;
-		*)
-			echo "Invalid option: $1"
-			displayUsageAndExit
-			;;
-	esac
-	shift
-done
-
 OS="$(uname -s)"
 
-if [ "$OS" = "Darwin" ]; then
-	# Set macOS defaults
-	"$DOTFILES/macos/set-defaults.sh"
+usage() {
+	cat <<EOF
+dot — dotfiles management
 
-	# Install homebrew
-	"$DOTFILES/homebrew/install.sh" 2>&1
+Usage:
+  dot                Same as 'dot install'
+  dot install        Install/refresh everything (idempotent)
+  dot update         git pull, then install, then upgrade system packages
+  dot edit           Open the dotfiles dir in \$EDITOR
+  dot help           Show this message
+EOF
+}
 
-	# Upgrade homebrew
-	echo "› brew update"
-	brew update
-elif [ "$OS" = "Linux" ]; then
-	# Install apt packages, fonts, etc.
-	"$DOTFILES/linux/install.sh"
-fi
+cmd_install() {
+	if [ "$OS" = "Darwin" ]; then
+		"$DOTFILES/macos/set-defaults.sh"
+		"$DOTFILES/homebrew/install.sh" 2>&1
+		echo "› brew update"
+		brew update
+	elif [ "$OS" = "Linux" ]; then
+		"$DOTFILES/linux/install.sh"
+	fi
 
-# Install software (runs Brewfile on macOS, all topic install.sh files everywhere)
-echo "› $DOTFILES/script/install"
-"$DOTFILES/script/install"
+	echo "› $DOTFILES/script/install"
+	"$DOTFILES/script/install"
+}
+
+cmd_update() {
+	echo "› git -C $DOTFILES pull --rebase --autostash"
+	git -C "$DOTFILES" pull --rebase --autostash
+
+	cmd_install
+
+	if [ "$OS" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+		echo "› brew upgrade"
+		brew upgrade || true
+		echo "› brew cleanup"
+		brew cleanup || true
+	elif [ "$OS" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
+		echo "› sudo apt-get update && sudo apt-get upgrade -y"
+		sudo apt-get update -y
+		sudo apt-get upgrade -y
+		sudo apt-get autoremove -y
+	fi
+
+	if [ -d "$HOME/.oh-my-zsh" ] && [ -x "$HOME/.oh-my-zsh/tools/upgrade.sh" ]; then
+		echo "› oh-my-zsh update"
+		env ZSH="$HOME/.oh-my-zsh" sh "$HOME/.oh-my-zsh/tools/upgrade.sh" || true
+	fi
+}
+
+cmd_edit() {
+	exec "${EDITOR:-vi}" "$dotfilesDirectory"
+}
+
+# Default subcommand is `install` for backwards compatibility with the old
+# argument-less invocation from script/bootstrap.
+subcommand="${1:-install}"
+shift 2>/dev/null || true
+
+case "$subcommand" in
+	install)            cmd_install "$@" ;;
+	update)             cmd_update  "$@" ;;
+	edit|-e|--edit)     cmd_edit    "$@" ;;
+	help|-h|--help)     usage ;;
+	*)
+		echo "dot: unknown subcommand '$subcommand'" >&2
+		echo "" >&2
+		usage >&2
+		exit 1
+		;;
+esac
