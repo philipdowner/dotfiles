@@ -3,7 +3,13 @@
 #-------------------------------------------
 # PowerLevel10K Theme for Oh My ZSH
 # https://github.com/romkatv/powerlevel10k#oh-my-zsh
+#
+# macOS-only: on Linux this dotfiles repo uses oh-my-zsh's default theme.
 #-------------------------------------------
+if [ "$(uname -s)" != "Darwin" ]; then
+  exit 0
+fi
+
 if [ -d ${HOME}/.oh-my-zsh ]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 fi

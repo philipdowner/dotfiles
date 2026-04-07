@@ -25,6 +25,3 @@ fd-find
 tldr
 shellcheck
 xclip
-
-# --- Fonts (for powerlevel10k glyphs) ---
-fonts-firacode

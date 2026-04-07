@@ -2,8 +2,8 @@
 #
 # linux/install.sh
 #
-# Installs apt packages from linux/Aptfile and the MesloLGS NF font used by
-# powerlevel10k. Safe to re-run.
+# Installs apt packages from linux/Aptfile and sets zsh as the default shell.
+# Safe to re-run.
 
 set -e
 
@@ -36,23 +36,6 @@ if [ -n "$PACKAGES" ]; then
   # shellcheck disable=SC2086
   sudo apt-get install -y --no-install-recommends $PACKAGES
 fi
-
-# --- MesloLGS NF font (used by powerlevel10k) -------------------------------
-FONT_DIR="$HOME/.local/share/fonts"
-mkdir -p "$FONT_DIR"
-install_font() {
-  name="$1"
-  url="$2"
-  if [ ! -f "$FONT_DIR/$name" ]; then
-    echo "› installing font: $name"
-    curl -fsSL -o "$FONT_DIR/$name" "$url"
-  fi
-}
-install_font "MesloLGS NF Regular.ttf"     "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-install_font "MesloLGS NF Bold.ttf"        "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
-install_font "MesloLGS NF Italic.ttf"      "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
-install_font "MesloLGS NF Bold Italic.ttf" "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
-fc-cache -f >/dev/null 2>&1 || true
 
 # --- Make zsh the default shell --------------------------------------------
 if command -v zsh >/dev/null 2>&1 && [ "$(basename "$SHELL")" != "zsh" ]; then

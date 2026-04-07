@@ -28,11 +28,11 @@ Linux, the installer:
 1. Installs the apt packages listed in [`linux/Aptfile`](linux/Aptfile) — a
    lean, language-agnostic set focused on shell + dev fundamentals
    (zsh, git, curl, ripgrep, fd, jq, build-essential, etc.).
-1. Installs the **MesloLGS NF** font used by powerlevel10k.
 1. Installs **Docker Engine** + the Compose v2 plugin from Docker's official
    apt repo, and adds your user to the `docker` group.
 1. Installs **asdf** into `~/.asdf` and configures the ruby + nodejs plugins.
-1. Clones **oh-my-zsh** and **powerlevel10k**.
+1. Clones **oh-my-zsh** (using its default `robbyrussell` theme — p10k is
+   macOS-only in this repo).
 1. Sets `zsh` as your default login shell.
 
 ### Philosophy
@@ -54,8 +54,8 @@ if their CLIs end up on `$PATH`.
 ### What is skipped on Linux
 
 - The `Brewfile` and everything under `homebrew/` and `macos/` (no-op).
-- `iterm/install.sh` (iTerm2 is macOS-only — use GNOME Terminal, set its font
-  to "MesloLGS NF").
+- `iterm/install.sh` (iTerm2 is macOS-only — use GNOME Terminal).
+- `powerlevel10k/install.sh` (oh-my-zsh's default theme is used on Linux).
 - `vscode/install.sh` is skipped automatically if the `code` CLI isn't on
   `$PATH`.
 
