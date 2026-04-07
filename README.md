@@ -56,8 +56,6 @@ if their CLIs end up on `$PATH`.
 - The `Brewfile` and everything under `homebrew/` and `macos/` (no-op).
 - `iterm/install.sh` (iTerm2 is macOS-only — use GNOME Terminal).
 - `powerlevel10k/install.sh` (oh-my-zsh's default theme is used on Linux).
-- `vscode/install.sh` is skipped automatically if the `code` CLI isn't on
-  `$PATH`.
 
 ## Frequently Asked Installer Questions
 

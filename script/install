@@ -15,12 +15,6 @@ fi
 # below via the find loop). Nothing extra to do here.
 
 # find the installers and run them iteratively.
-# Skip vscode/install.sh when the `code` CLI is not available (e.g. headless box).
 find . -name install.sh | while read -r installer ; do
-  case "$installer" in
-    */vscode/install.sh)
-      command -v code >/dev/null 2>&1 || { echo "skip $installer (no 'code' CLI)"; continue; }
-      ;;
-  esac
   sh -c "$installer"
 done

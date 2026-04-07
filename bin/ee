@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# GUI editors (PhpStorm, vscode, etc.) require `--wait` when invoked from
+# GUI editors (PhpStorm, etc.) require `--wait` when invoked from
 # a shell prompt so the calling process blocks until you close the file.
 #
 EDITOR="$EDITOR --wait" $@
