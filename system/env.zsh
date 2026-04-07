@@ -1,1 +1,2 @@
-export EDITOR='code'
+export EDITOR='phpstorm'
+export VISUAL='phpstorm'
