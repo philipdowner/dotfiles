@@ -1,0 +1,23 @@
+# ~/.localrc — per-machine zsh extras (NOT in git)
+#
+# Sourced at the very top of ~/.zshrc (see zsh/zshrc.symlink). Use this for
+# anything that's specific to one laptop or that you don't want committed
+# to a public dotfiles repo: work credentials, API tokens, machine-specific
+# $PATH entries, hostname-specific aliases.
+#
+# Pairs nicely with the 1Password CLI — pull secrets at shell-start time so
+# they live in env vars but never on disk:
+#
+#   export GITHUB_TOKEN="$(op read 'op://Private/GitHub/token')"
+#   export OPENAI_API_KEY="$(op read 'op://Private/OpenAI/api key')"
+#
+# Per-machine PATH additions:
+#
+#   path=(/opt/homebrew/opt/postgresql@16/bin $path)
+#
+# Hostname-specific tweaks:
+#
+#   case "$(hostname -s)" in
+#     work-laptop) export AWS_PROFILE=work ;;
+#     home-desktop) export AWS_PROFILE=personal ;;
+#   esac

@@ -71,7 +71,15 @@ The installation process does the following things:
 
 ### The installer is asking if I want to skip, overwrite or backup files. What does that mean?
 
-In the process of symlinking files, we first check if they exist in our target location. If this is the first time running this script, select `[b]ackup` (typing the lowercase-b) or `[B]ackup all` (typing the uppercase-b). Once files are symlinked you will not be prompted to repeat this.
+In the process of symlinking files, we first check if they exist in our target location. Pick whatever you like — both **overwrite** and **backup** now move the existing file into a timestamped safety directory at `~/.dotfiles-backup/<timestamp>/<original/path>` first, so nothing is ever destroyed. The installer never `rm`s a real file. Once files are symlinked you will not be prompted to repeat this.
+
+### Per-machine config: `~/.localrc`
+
+Anything you don't want committed to this repo (work creds, API tokens, machine-specific `$PATH` entries, hostname-specific tweaks) goes in `~/.localrc`. It's sourced at the very top of `~/.zshrc`, before any topic config. See [`zsh/localrc.example`](zsh/localrc.example) for ideas — including how to combine it with the 1Password CLI to inject secrets at shell-start time without ever writing them to disk:
+
+```sh
+export GITHUB_TOKEN="$(op read 'op://Private/GitHub/token')"
+```
 
 ### Why is the installer asking for my computer password?
 
