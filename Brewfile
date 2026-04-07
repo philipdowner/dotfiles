@@ -8,7 +8,6 @@ tap 'romkatv/powerlevel10k'
 #-------------------------------------------
 # System Utilities
 #-------------------------------------------
-brew 'asdf'                                  # https://asdf-vm.com/
 brew 'curl'                                  # https://curl.se/
 brew 'wget'                                  # https://www.gnu.org/software/wget/
 brew 'tree'                                  # http://mama.indstate.edu/users/ice/tree/

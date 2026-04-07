@@ -25,3 +25,9 @@ fd-find
 tldr
 shellcheck
 xclip
+
+# --- Node.js (for Claude Code, generic JS tooling) ---
+# Ubuntu's packaged node is fine for editor tooling and globally installed
+# CLIs. Project-specific node versions belong in the project's Docker image.
+nodejs
+npm

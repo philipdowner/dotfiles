@@ -30,7 +30,6 @@ Linux, the installer:
    (zsh, git, curl, ripgrep, fd, jq, build-essential, etc.).
 1. Installs **Docker Engine** + the Compose v2 plugin from Docker's official
    apt repo, and adds your user to the `docker` group.
-1. Installs **asdf** into `~/.asdf` and configures the ruby + nodejs plugins.
 1. Clones **oh-my-zsh** (using its default `robbyrussell` theme — p10k is
    macOS-only in this repo).
 1. Sets `zsh` as your default login shell.
@@ -40,8 +39,8 @@ Linux, the installer:
 This repo aims to give you a stable, reproducible base shell + tooling
 environment. **Language runtimes (PHP, MySQL, Postgres, Python versions, etc.)
 are intentionally not installed system-wide on Linux** — run those in
-per-project Docker containers instead. Node + Ruby are managed via `asdf` so
-you can pin versions per repo.
+per-project Docker containers instead. Node ships from apt for editor
+tooling and one-off CLIs only.
 
 ### Adding apps
 
