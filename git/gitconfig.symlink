@@ -45,8 +45,8 @@
 [push]
         default = simple
         autoSetupRemote = true
-[credential]
-	helper = osxkeychain
+[url "git@github.com:"]
+        insteadOf = https://github.com/
 [alias]
         # DOTFILES Functions
         promote = !$DOTFILES/bin/git-promote
