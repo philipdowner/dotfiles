@@ -1,5 +1,8 @@
 alias reload!='. ~/.zshrc'
 
+# Open a directory in PHPStorm without blocking the terminal
+storm() { nohup phpstorm "$@" >/dev/null 2>&1 &| }
+
 # Trim new lines and copy to clipboard
 alias copy="tr -d '\n' | pbcopy"
 
