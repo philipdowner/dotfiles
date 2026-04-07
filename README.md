@@ -19,6 +19,46 @@ If you're on a brand new Mac, there's very little to worry about. Cheers!
 
 After completion, you should follow the [post-installation steps](#post-installation) detailed below.
 
+## Ubuntu / Debian Linux
+
+The same `script/bootstrap` works on Ubuntu (tested on 22.04+) and Debian. On
+Linux, the installer:
+
+1. Symlinks all `*.symlink` dotfiles into `$HOME` (same as macOS).
+1. Installs the apt packages listed in [`linux/Aptfile`](linux/Aptfile) — a
+   lean, language-agnostic set focused on shell + dev fundamentals
+   (zsh, git, curl, ripgrep, fd, jq, build-essential, etc.).
+1. Installs the **MesloLGS NF** font used by powerlevel10k.
+1. Installs **Docker Engine** + the Compose v2 plugin from Docker's official
+   apt repo, and adds your user to the `docker` group.
+1. Installs **asdf** into `~/.asdf` and configures the ruby + nodejs plugins.
+1. Clones **oh-my-zsh** and **powerlevel10k**.
+1. Sets `zsh` as your default login shell.
+
+### Philosophy
+
+This repo aims to give you a stable, reproducible base shell + tooling
+environment. **Language runtimes (PHP, MySQL, Postgres, Python versions, etc.)
+are intentionally not installed system-wide on Linux** — run those in
+per-project Docker containers instead. Node + Ruby are managed via `asdf` so
+you can pin versions per repo.
+
+### Adding apps
+
+To add more apt packages, append them to [`linux/Aptfile`](linux/Aptfile) and
+re-run `script/bootstrap` (or `bin/dot`). For GUI apps not in the apt repos
+(VS Code, Chrome, Slack, etc.), install them however you prefer (snap,
+flatpak, vendor `.deb`) — the dotfiles config will pick them up automatically
+if their CLIs end up on `$PATH`.
+
+### What is skipped on Linux
+
+- The `Brewfile` and everything under `homebrew/` and `macos/` (no-op).
+- `iterm/install.sh` (iTerm2 is macOS-only — use GNOME Terminal, set its font
+  to "MesloLGS NF").
+- `vscode/install.sh` is skipped automatically if the `code` CLI isn't on
+  `$PATH`.
+
 ## Frequently Asked Installer Questions
 
 ### What does the installer do?

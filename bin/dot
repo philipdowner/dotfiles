@@ -7,8 +7,9 @@
 
 set -e
 
-parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"
+parentDirectory="$(cd "$( dirname "${BASH_SOURCE[0]:-$0}" )" && pwd -P)"
 dotfilesDirectory="$(cd "$( dirname "$parentDirectory" )" && pwd -P)"
+export DOTFILES="$dotfilesDirectory"
 
 displayUsageAndExit() {
 	echo "dot -- dotfiles management"
@@ -38,16 +39,23 @@ while test $# -gt 0; do
 	shift
 done
 
-# Set macOS defaults
-$DOTFILES/macos/set-defaults.sh
+OS="$(uname -s)"
 
-# Install homebrew
-$DOTFILES/homebrew/install.sh 2>&1
+if [ "$OS" = "Darwin" ]; then
+	# Set macOS defaults
+	"$DOTFILES/macos/set-defaults.sh"
 
-# Upgrade homebrew
-echo "› brew update"
-brew update
+	# Install homebrew
+	"$DOTFILES/homebrew/install.sh" 2>&1
 
-# Install software
+	# Upgrade homebrew
+	echo "› brew update"
+	brew update
+elif [ "$OS" = "Linux" ]; then
+	# Install apt packages, fonts, etc.
+	"$DOTFILES/linux/install.sh"
+fi
+
+# Install software (runs Brewfile on macOS, all topic install.sh files everywhere)
 echo "› $DOTFILES/script/install"
-$DOTFILES/script/install
+"$DOTFILES/script/install"

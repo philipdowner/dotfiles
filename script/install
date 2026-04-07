@@ -4,10 +4,23 @@
 
 set -e
 
-cd "$(dirname $0)"/..
+cd "$(dirname "$0")"/..
 
-# Run the brewfile, but always successfully exit for previously installed apps
-brew bundle --force || true
+# macOS: install Brewfile contents.
+if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+  brew bundle --force || true
+fi
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# Linux: install apt packages from linux/Aptfile (handled by linux/install.sh
+# below via the find loop). Nothing extra to do here.
+
+# find the installers and run them iteratively.
+# Skip vscode/install.sh when the `code` CLI is not available (e.g. headless box).
+find . -name install.sh | while read -r installer ; do
+  case "$installer" in
+    */vscode/install.sh)
+      command -v code >/dev/null 2>&1 || { echo "skip $installer (no 'code' CLI)"; continue; }
+      ;;
+  esac
+  sh -c "$installer"
+done

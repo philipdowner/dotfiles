@@ -1,0 +1,30 @@
+# Aptfile - apt packages installed by linux/install.sh
+#
+# One package per line. Lines starting with # and blank lines are ignored.
+# This is the Linux equivalent of the Brewfile. Add packages here to extend
+# your environment; re-run `script/bootstrap` (or `bin/dot`) to install them.
+#
+# Keep this list lean and language-agnostic. Project-specific runtimes
+# (PHP, MySQL, Postgres, etc.) belong in per-project Docker containers.
+
+# --- Shell + core CLI ---
+zsh
+curl
+wget
+git
+ca-certificates
+gnupg
+lsb-release
+software-properties-common
+build-essential
+unzip
+tree
+jq
+ripgrep
+fd-find
+tldr
+shellcheck
+xclip
+
+# --- Fonts (for powerlevel10k glyphs) ---
+fonts-firacode
