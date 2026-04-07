@@ -25,6 +25,8 @@ fd-find
 tldr
 shellcheck
 xclip
+git-delta
+zsh-syntax-highlighting
 
 # --- Node.js (for Claude Code, generic JS tooling) ---
 # Ubuntu's packaged node is fine for editor tooling and globally installed

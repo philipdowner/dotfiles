@@ -16,7 +16,9 @@ brew 'coreutils'                             # https://www.gnu.org/software/core
 brew 'shellcheck'                            # https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/shellcheck.rb
 brew 'noti'                                  # https://github.com/variadico/noti - Trigger notifications when a process completes
 brew 'trash'                                 # https://hasseg.org/trash/ - CLI tool that moves files or folder to the trash
-brew 'lorem'                                 # https://github.com/per9000/lorem - Lorem ipsum generator for console
+brew 'jq'                                    # https://jqlang.github.io/jq/ - JSON processor
+brew 'ripgrep'                               # https://github.com/BurntSushi/ripgrep - Fast recursive grep
+brew 'fd'                                    # https://github.com/sharkdp/fd - Friendly find replacement
 
 #-------------------------------------------
 # Terminal and IDE
@@ -104,11 +106,7 @@ cask 'cyberduck'                            # https://cyberduck.io/ - FTP Client
 cask 'dbeaver-community'                    # https://dbeaver.io/ - Universal database tool and SQL client
 #cask 'mysqlworkbench'                       # https://www.mysql.com/products/workbench/ - Visual tool to design, develop and administer MySQL servers
 
-#-------------------------------------------
-# Languages - PHP
-#-------------------------------------------
-brew 'php@8.4'                              # https://www.php.net/ - General-purpose scripting language
-brew 'composer'                             # https://getcomposer.org/ - Dependency Manager for PHP
+# Languages live in per-project Docker containers, not on the host.
 
 #-------------------------------------------
 # FONTS
