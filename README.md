@@ -94,6 +94,26 @@ ZSH_PROFILE=1 zsh -ic exit
 
 This loads `zsh/zprof` and prints a per-function timing report at the end of zshrc, so you can see exactly which topic file (or oh-my-zsh plugin) is the culprit. Use [`system/lazy.zsh`](system/lazy.zsh)'s `lazy_load` helper to defer slow initializers (`nvm`, `pyenv`, `direnv`, etc.) until first use.
 
+### Signing git commits with the 1Password SSH agent
+
+The `1password/install.sh` topic enables the SSH agent integration; you can use the same key to sign your git commits without ever exporting it. Add this to `~/.gitconfig.local` (so it doesn't end up in the public repo):
+
+```ini
+[user]
+    signingkey = ssh-ed25519 AAAAC3Nza...your public key...
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"   # macOS
+    # program = "/opt/1Password/op-ssh-sign"                              # Linux
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
+```
+
+Push and GitHub will mark your commits as **Verified** with no extra agents, no keychain access prompts, and no on-disk private key.
+
 ### Per-machine config: `~/.localrc`
 
 Anything you don't want committed to this repo (work creds, API tokens, machine-specific `$PATH` entries, hostname-specific tweaks) goes in `~/.localrc`. It's sourced at the very top of `~/.zshrc`, before any topic config. See [`zsh/localrc.example`](zsh/localrc.example) for ideas — including how to combine it with the 1Password CLI to inject secrets at shell-start time without ever writing them to disk:

@@ -39,6 +39,7 @@ cmd_install() {
 		echo "› brew update"
 		brew update
 	elif [ "$OS" = "Linux" ]; then
+		"$DOTFILES/linux/set-defaults.sh"
 		"$DOTFILES/linux/install.sh"
 	fi
 
