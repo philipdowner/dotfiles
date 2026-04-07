@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = code --wait
+        editor = phpstorm --wait
         pager = delta
 [delta]
         navigate = true    # use n and N to move between diff sections
@@ -19,21 +19,29 @@
         line-numbers = true
 [diff]
         colorMoved = default
+        tool = phpstorm
 [difftool]
         prompt = false
+[difftool "phpstorm"]
+        cmd = phpstorm diff \"$LOCAL\" \"$REMOTE\"
 [help]
         autocorrect = 1
 [hub]
         protocol = ssh
-        editor = "code --wait"
+        editor = "phpstorm --wait"
 [include]
         path = ~/.gitconfig.local
 [interactive]
         diffFilter = delta --color-only
 [merge]
         conflictstyle = diff3
+        tool = phpstorm
 [mergetool]
         keepBackup = false
+        prompt = false
+[mergetool "phpstorm"]
+        cmd = phpstorm merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+        trustExitCode = true
 [push]
         default = simple
         autoSetupRemote = true
