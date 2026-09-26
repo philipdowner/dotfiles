@@ -1,9 +1,6 @@
 # Command Docs: https://docs.brew.sh/Manpage#bundle-subcommand
 # File Format Docs: https://thoughtbot.com/blog/brewfile-a-gemfile-but-for-homebrew
 
-# Taps
-tap 'romkatv/powerlevel10k'
-
 #-------------------------------------------
 # System Utilities
 #-------------------------------------------
@@ -21,8 +18,12 @@ brew 'fd'                                    # https://github.com/sharkdp/fd - F
 # Terminal and IDE
 #-------------------------------------------
 cask 'iterm2'                                # https://iterm2.com/ - MacOs Terminal replacement
-brew 'romkatv/powerlevel10k/powerlevel10k'   # https://github.com/romkatv/powerlevel10k
-brew 'zsh-syntax-highlighting'
+brew 'oh-my-posh'                            # https://ohmyposh.dev/ - Prompt theme engine
+brew 'zsh-autosuggestions'                   # https://github.com/zsh-users/zsh-autosuggestions
+brew 'zsh-syntax-highlighting'               # https://github.com/zsh-users/zsh-syntax-highlighting
+cask 'font-meslo-lg-nerd-font'               # https://www.nerdfonts.com/ - Glyphs for the prompt theme
+cask 'font-fira-code'                        # https://github.com/tonsky/FiraCode
+cask 'font-jetbrains-mono'                   # https://www.jetbrains.com/lp/mono/
 
 #-------------------------------------------
 # Git Version Control

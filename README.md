@@ -41,7 +41,9 @@ That's it. Re-run `script/bootstrap` or `dot update` any time — both are idemp
 ## What you get
 
 ### Shell
-- **zsh** as the default login shell, with [oh-my-zsh](https://ohmyz.sh/) (default `robbyrussell` theme on Linux, [powerlevel10k](https://github.com/romkatv/powerlevel10k) on macOS)
+- **zsh** as the default login shell, with an [Oh My Posh](https://ohmyposh.dev/) prompt (built-in `agnoster` theme) on both macOS and Linux
+- [Meslo Nerd Font](https://www.nerdfonts.com/) for the prompt's glyphs (Homebrew cask on macOS, `~/.local/share/fonts` on Linux)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - Topic-based config: drop a `*.zsh` file in any subdirectory and it gets sourced
 - `~/.localrc` escape hatch for per-machine secrets and tweaks (see [Customization](#customization))
 - Auto-deduped `$PATH`, fast history search, sensible defaults
@@ -53,7 +55,7 @@ That's it. Re-run `script/bootstrap` or `dot update` any time — both are idemp
 - Helpful aliases (`promote`, `wtf`, etc.) — see `git/gitconfig.symlink`
 
 ### CLI tools
-- `git`, `gh` (GitHub CLI), `curl`, `wget`, `tree`, `tldr`, `jq`, `ripgrep`, `fd`, `shellcheck`, `zsh-syntax-highlighting`
+- `git`, `gh` (GitHub CLI), `curl`, `wget`, `tree`, `tldr`, `jq`, `ripgrep`, `fd`, `shellcheck`
 - **Node.js** + **npm** from apt (Linux) or brew (macOS) — for global CLIs only; project Node lives in Docker
 - **Claude Code** (`@anthropic-ai/claude-code`) via npm
 - **Docker Engine** + Compose v2 (Linux: official apt repo; macOS: Docker Desktop)
@@ -94,7 +96,7 @@ After the first install, `bin/dot` is the maintenance entry point:
 ```sh
 dot              # same as `dot install`
 dot install      # re-run all installers (idempotent)
-dot update       # git pull, install, then upgrade brew/apt + oh-my-zsh
+dot update       # git pull, install, then upgrade brew/apt + oh-my-posh
 dot edit         # open ~/.dotfiles in PhpStorm
 dot help         # show usage
 ```
@@ -197,8 +199,8 @@ A few things the installer can't fully automate.
 
 ### macOS
 
-- **PhpStorm:** Install via [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/). In Toolbox settings, enable "Generate shell scripts" so the `phpstorm` launcher ends up on your `$PATH`. (Or in PhpStorm: *Tools → Create Command-line Launcher*.)
-- **iTerm2 theme:** *iTerm2 → Settings → Profiles* and pick `Dotfiles Default`.
+- **PhpStorm:** Install via [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/). In Toolbox settings, enable "Generate shell scripts" so the `phpstorm` launcher ends up on your `$PATH`. If PhpStorm is installed straight into `/Applications` instead, `phpstorm/install.sh` symlinks the launcher into `~/.local/bin`.
+- **iTerm2 profile:** *iTerm2 → Settings → Profiles*, select `Dotfiles Default` and click *Other Actions… → Set as Default*. It uses the Meslo Nerd Font the prompt needs.
 - **Open new apps once:** macOS will prompt for security confirmation the first time you launch any non-App-Store app — this is expected.
 
 ### Linux (Ubuntu/Debian)
@@ -207,7 +209,7 @@ A few things the installer can't fully automate.
 - **Log out and back in** after the first install so:
   - your shell switches to zsh, and
   - your user picks up `docker` group membership
-- **GNOME Terminal font:** *Preferences → your profile → Custom font*. Pick whichever monospace font you prefer.
+- **Terminal font:** set your terminal's font to *MesloLGS Nerd Font* (GNOME Terminal: *Preferences → your profile → Custom font*), or the prompt's separators and icons render as boxes. When you SSH into a server, the font is needed on your local machine, not the server.
 - **1Password SSH agent:** Open 1Password → *Settings → Developer → Use the SSH agent*. The `1password/env.zsh` file will export `SSH_AUTH_SOCK` for you on next shell start.
 
 ## FAQ

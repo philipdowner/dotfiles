@@ -65,9 +65,10 @@ cmd_update() {
 		sudo apt-get autoremove -y
 	fi
 
-	if [ -d "$HOME/.oh-my-zsh" ] && [ -x "$HOME/.oh-my-zsh/tools/upgrade.sh" ]; then
-		echo "› oh-my-zsh update"
-		env ZSH="$HOME/.oh-my-zsh" sh "$HOME/.oh-my-zsh/tools/upgrade.sh" || true
+	# Homebrew upgrades oh-my-posh on macOS; on Linux it lives in ~/.local/bin.
+	if [ "$OS" = "Linux" ] && [ -x "$HOME/.local/bin/oh-my-posh" ]; then
+		echo "› oh-my-posh upgrade"
+		"$HOME/.local/bin/oh-my-posh" upgrade || true
 	fi
 }
 

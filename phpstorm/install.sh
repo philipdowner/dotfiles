@@ -11,16 +11,27 @@
 # Otherwise we look for a Toolbox install and symlink its phpstorm.sh into
 # ~/.local/bin/phpstorm.
 #
-# macOS users get the launcher from JetBrains Toolbox or from PhpStorm's
-# "Tools → Create Command-line Launcher" menu item — nothing to do here.
+# On macOS, a PhpStorm installed from Toolbox or with "Tools → Create
+# Command-line Launcher" already provides the launcher. Otherwise we symlink the
+# app bundle's binary into ~/.local/bin/phpstorm.
 
 set -e
 
-if [ "$(uname -s)" != "Linux" ]; then
+if command -v phpstorm >/dev/null 2>&1 || [ -e "$HOME/.local/bin/phpstorm" ]; then
   exit 0
 fi
 
-if command -v phpstorm >/dev/null 2>&1; then
+if [ "$(uname -s)" = "Darwin" ]; then
+  APP_BIN="/Applications/PhpStorm.app/Contents/MacOS/phpstorm"
+  if [ -x "$APP_BIN" ]; then
+    mkdir -p "$HOME/.local/bin"
+    echo "› symlinking $APP_BIN → ~/.local/bin/phpstorm"
+    ln -sf "$APP_BIN" "$HOME/.local/bin/phpstorm"
+  fi
+  exit 0
+fi
+
+if [ "$(uname -s)" != "Linux" ]; then
   exit 0
 fi
 

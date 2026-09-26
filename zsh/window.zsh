@@ -17,3 +17,11 @@ function title() {
   esac
 }
 
+# Show the current directory in the window/tab title, and the running command
+# while one is running.
+autoload -Uz add-zsh-hook
+_window_title_precmd() { print -Pn "\e]0;%~\a" }
+_window_title_preexec() { print -Pn "\e]0;%~: "; print -rn -- "${1%% *}"; print -n "\a" }
+add-zsh-hook precmd _window_title_precmd
+add-zsh-hook preexec _window_title_preexec
+

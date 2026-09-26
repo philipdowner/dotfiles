@@ -31,6 +31,10 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# keep a directory stack: `cd -<tab>` lists recent dirs, `-` goes back one
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_MINUS
+alias -- -='cd -'
+
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line

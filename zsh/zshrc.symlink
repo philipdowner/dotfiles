@@ -34,18 +34,9 @@ do
   source $file
 done
 
-# Initialize OhMyZSH
-if [[ -f $DOTFILES/ohmyzsh/oh-my-zshrc ]]; then
-  () {
-    local ZSH="$HOME/.oh-my-zsh"
-    source $DOTFILES/ohmyzsh/oh-my-zshrc
-    export OHMYZSH="$ZSH"
-  }
-else
-  # initialize autocomplete here, otherwise functions won't be loaded
-  autoload -U compinit
-  compinit
-fi
+# initialize autocomplete here, otherwise functions won't be loaded
+autoload -U compinit
+compinit
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
@@ -55,9 +46,6 @@ done
 
 unset config_files
 
-# Notify existing users that they should migrate to another variable.
-export ZSH='$ZSH is deprecated, use either $DOTFILES or $OHMYZSH instead.'
-
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
 autoload -U up-line-or-beginning-search
@@ -66,6 +54,34 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+# Prompt: Oh My Posh with its built-in agnoster theme. The themes ship with the
+# Homebrew formula on macOS and are installed by oh-my-posh/install.sh on Linux.
+if (( $+commands[oh-my-posh] )); then
+  () {
+    local theme
+    for theme in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/opt/oh-my-posh/themes/agnoster.omp.json} \
+                 $HOME/.local/share/oh-my-posh/themes/agnoster.omp.json; do
+      [[ -r $theme ]] && break
+      theme=
+    done
+    eval "$(oh-my-posh init zsh ${theme:+--config=$theme})"
+  }
+fi
+
+# Fish-style autosuggestions and syntax highlighting, from Homebrew on macOS
+# and apt on Linux. zsh-syntax-highlighting must be sourced last.
+for plugin in zsh-autosuggestions zsh-syntax-highlighting
+do
+  for dir in ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share} /usr/share
+  do
+    if [[ -r $dir/$plugin/$plugin.zsh ]]; then
+      source $dir/$plugin/$plugin.zsh
+      break
+    fi
+  done
+done
+unset plugin dir
 
 # Print the profiler report if ZSH_PROFILE was set at startup.
 if [[ -n "$ZSH_PROFILE" ]]; then

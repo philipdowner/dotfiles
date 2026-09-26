@@ -10,6 +10,7 @@ ITERM_PROFILE_FILENAME='default-iterm2-profile.json'
 
 mkdir -p "${HOME}${ITERM_PROFILE_DIR}"
 
-if [ ! -r "${ITERM_PROFILE_DIR}/${ITERM_PROFILE_FILENAME}" ]; then
-    cp "$DOTFILES/iterm/$ITERM_PROFILE_FILENAME" "${HOME}${ITERM_PROFILE_DIR}/${ITERM_PROFILE_FILENAME}"
-fi
+# The repo copy is the source of truth and is re-copied on every install.
+# iTerm writes changes made in its Settings UI back to the installed copy
+# ("Rewritable"), so copy those into the repo before re-running bin/dot.
+cp "$DOTFILES/iterm/$ITERM_PROFILE_FILENAME" "${HOME}${ITERM_PROFILE_DIR}/${ITERM_PROFILE_FILENAME}"
