@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = code --wait
+        editor = /Applications/PhpStorm.app/Contents/MacOS/phpstorm --wait
         pager = delta
 [delta]
         navigate = true    # use n and N to move between diff sections
@@ -28,7 +28,7 @@
         autocorrect = 1
 [hub]
         protocol = ssh
-        editor = "code --wait"
+        editor = "/Applications/PhpStorm.app/Contents/MacOS/phpstorm --wait"
 [include]
         path = ~/.gitconfig.local
 [interactive]
@@ -107,3 +107,15 @@
     assume = "update-index --assume-unchanged" # Mark a file as "assume unchanged", which means that Git will treat it as though there are no changes to it even if there are. Useful for temporary changes to tracked files
     unassume = "update-index --no-assume-unchanged" # Reverse the above
     assumed = "!git ls-files -v | grep ^h | cut -c 3-" # Show the files that are currently assume-unchanged
+
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHzcy5tVjFBJESsbNqTyxMmqwLXTMcnsDPhdKMWQIjub
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true
