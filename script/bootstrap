@@ -53,6 +53,20 @@ setup_gitconfig () {
 }
 
 
+## Single timestamped backup directory shared across this bootstrap run.
+## Anything we'd otherwise destructively overwrite gets moved here, preserving
+## its absolute path so a `cp -a $DOTFILES_BACKUP_DIR/. /` would restore it.
+DOTFILES_BACKUP_DIR="${DOTFILES_BACKUP_DIR:-$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)}"
+
+backup_to_safe_dir () {
+  local target="$1"
+  local rel="${target#/}"
+  local backup_path="$DOTFILES_BACKUP_DIR/$rel"
+  mkdir -p "$(dirname "$backup_path")"
+  mv "$target" "$backup_path"
+  success "backed up $target → $backup_path"
+}
+
 link_file () {
   local src=$1 dst=$2
 
@@ -103,16 +117,11 @@ link_file () {
     backup=${backup:-$backup_all}
     skip=${skip:-$skip_all}
 
-    if [ "$overwrite" == "true" ]
+    # Both overwrite and backup go through the same timestamped safety net
+    # now — we never `rm -rf` a real file the user might still want.
+    if [ "$overwrite" == "true" ] || [ "$backup" == "true" ]
     then
-      rm -rf "$dst"
-      success "removed $dst"
-    fi
-
-    if [ "$backup" == "true" ]
-    then
-      mv "$dst" "${dst}.backup"
-      success "moved $dst to ${dst}.backup"
+      backup_to_safe_dir "$dst"
     fi
 
     if [ "$skip" == "true" ]
@@ -148,17 +157,18 @@ create_code_directory
 setup_gitconfig
 install_dotfiles
 
-#If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
+#Install OS-specific dependencies (Homebrew on macOS, apt on Linux).
+case "$(uname -s)" in
+  Darwin|Linux)
+    info "installing dependencies"
+    if source bin/dot | while read -r data; do info "$data"; done
+    then
+      success "dependencies installed"
+    else
+      fail "error installing dependencies"
+    fi
+    ;;
+esac
 
 echo ''
 echo '  All installed!'

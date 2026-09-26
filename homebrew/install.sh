@@ -1,24 +1,17 @@
 #!/bin/sh
 #
-# Homebrew
+# Homebrew (macOS only)
 #
-# This installs some of the common dependencies needed (or at least desired)
-# using Homebrew.
+# This installs Homebrew on macOS. On Linux this dotfiles repo uses apt
+# (see linux/install.sh) instead of Homebrew, so this script is a no-op there.
 
-# Check for Homebrew
-if test ! $(which brew)
-then
+if [ "$(uname -s)" != "Darwin" ]; then
+  exit 0
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
   echo "  Installing Homebrew for you."
-
-  # Install the correct homebrew for each OS type
-  if test "$(uname)" = "Darwin"
-  then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  elif test "$(expr substr $(uname -s) 1 5)" = "Linux"
-  then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-  fi
-
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 exit 0

@@ -10,7 +10,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = /Applications/PhpStorm.app/Contents/MacOS/phpstorm --wait
+        editor = phpstorm --wait
         pager = delta
 [delta]
         navigate = true    # use n and N to move between diff sections
@@ -19,27 +19,28 @@
         line-numbers = true
 [diff]
         colorMoved = default
-        tool = storm
+        tool = phpstorm
 [difftool]
         prompt = false
-[difftool "storm"]
-        cmd = /Applications/PhpStorm.app/Contents/MacOS/phpstorm diff "$LOCAL" "$REMOTE"
+[difftool "phpstorm"]
+        cmd = phpstorm diff \"$LOCAL\" \"$REMOTE\"
 [help]
         autocorrect = 1
 [hub]
         protocol = ssh
-        editor = "/Applications/PhpStorm.app/Contents/MacOS/phpstorm --wait"
+        editor = "phpstorm --wait"
 [include]
         path = ~/.gitconfig.local
 [interactive]
         diffFilter = delta --color-only
 [merge]
         conflictstyle = diff3
-        tool = storm
+        tool = phpstorm
 [mergetool]
         keepBackup = false
-[mergetool "storm"]
-        cmd = /Applications/PhpStorm.app/Contents/MacOS/phpstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+        prompt = false
+[mergetool "phpstorm"]
+        cmd = phpstorm merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
         trustExitCode = true
 [push]
         default = simple

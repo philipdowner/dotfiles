@@ -1,122 +1,239 @@
-# Philip Downer Dotfiles
+# Philip Downer's Dotfiles
 
-This repository allows you to install all the tools you'll need to setup a QA engineer environment on your brand new Mac. It is also safe to run this on your previously set-up Mac, with the expectation that it will change some of your system settings. Each action it performs is intended to be non-destructive and you will be prompted before anything is overwritten.
+A reproducible developer environment for **macOS** and **Ubuntu/Debian Linux**, set up by a single command. One repo, two OSes, same shell + git config + tooling on both.
 
-# :warning: A word of warning
+> [!NOTE]
+> The installer is non-destructive. Anything it would overwrite is moved into a timestamped backup directory first — it never `rm`s a real file.
 
-While I've done everything I can to ensure that this script is non-destructive, it does make some very opinionated decisions about how your Mac should be set up. You may wish to browse the [macos/set-defaults.sh](https://github.com/philipdowner/dotfiles/blob/master/macos/set-defaults.sh) file to get more familiar with the preferences that will be changed.
+## Contents
 
-The other area this script will modify is your configuration files. These are located in your home directory and usually look like`.zshrc`. If you've not made any modifications to these files - then you're fine. Otherwise you'll be prompted to backup this/these files during the installation process. They will be placed in the same directory they originated in with the `.backup` suffix appended.
+- [Quick start](#quick-start)
+- [What you get](#what-you-get)
+- [Philosophy](#philosophy)
+- [Day-to-day: `dot` commands](#day-to-day-dot-commands)
+- [Customization](#customization)
+  - [Per-machine config: `~/.localrc`](#per-machine-config-localrc)
+  - [Signing git commits with the 1Password SSH agent](#signing-git-commits-with-the-1password-ssh-agent)
+  - [Profiling shell startup](#profiling-shell-startup)
+- [How it works](#how-it-works)
+- [Post-install steps](#post-install-steps)
+- [FAQ](#faq)
 
-If you're on a brand new Mac, there's very little to worry about. Cheers!
+## Quick start
 
-# Installation
+```sh
+git clone https://github.com/philipdowner/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+script/bootstrap
+```
 
-1. Clone this repository into your home directory. `git clone https://github.com/philipdowner/dotfiles.git ~/.dotfiles`
-1. Switch to your new dotfiles directory. `cd ~/.dotfiles`
-1. Run the bootstrap installation script. `script/bootstrap`
-1. Follow the instructions in your Terminal to complete the installation process.
+The bootstrap script will:
 
-After completion, you should follow the [post-installation steps](#post-installation) detailed below.
+1. Prompt for your git author name + email (written to a git-ignored `~/.gitconfig.local`).
+2. Symlink every `*.symlink` file into `$HOME` (with timestamped backups of anything pre-existing).
+3. Detect your OS and run the right installer chain (`bin/dot install`).
 
-## Frequently Asked Installer Questions
+That's it. Re-run `script/bootstrap` or `dot update` any time — both are idempotent.
 
-### What does the installer do?
+> [!TIP]
+> If you want to customize without losing the ability to pull upstream changes, **fork** the repo first and clone your fork.
 
-Much of the configuration of MacOS and your terminal is handled through files in your home directory. These files often start with a dot - like `.zshrc`. Hence the name "dotfile". You could scour the web, install a bunch of software (some of which will tell you to update a particular dotfile) all on your own. Instead, we want to shortcut that process for you by providing the dotfiles and softare you can actually use right away.
+## What you get
 
-The installation process does the following things:
-1. **Make sure your MacOS software is up to date.** The installer will update your current operating system. This may require a restart of your computer.
-1. **Configure MacOS.** Set opinionated defaults optimized for the QA process, like changing your Screenshots folder and speeding up your key repeat rate.
-1. **Configure Git.** Ensure git recognizes you as an author. Set some sane defaults and helpful aliases.
-1. **Install Apps.** Install all the apps you'll most commonly use. Things like browsers, Slack, screenshot tools, but also command line tools like 1Password-CLI and tree.
-1. **Configure Command Line Apps.** Symlink (that's [a fancy name for creating an alias](https://devdojo.com/devdojo/what-is-a-symlink)) the necessary configuration files from `~/.dotfiles` into your home directory.
+### Shell
+- **zsh** as the default login shell, with [oh-my-zsh](https://ohmyz.sh/) (default `robbyrussell` theme on Linux, [powerlevel10k](https://github.com/romkatv/powerlevel10k) on macOS)
+- Topic-based config: drop a `*.zsh` file in any subdirectory and it gets sourced
+- `~/.localrc` escape hatch for per-machine secrets and tweaks (see [Customization](#customization))
+- Auto-deduped `$PATH`, fast history search, sensible defaults
 
-### The installer is asking if I want to skip, overwrite or backup files. What does that mean?
+### Git
+- Pre-configured `.gitconfig` with [git-delta](https://github.com/dandavison/delta) as the pager (side-by-side diffs, syntax highlighting)
+- **PhpStorm** wired up as `core.editor`, `diff.tool`, and `merge.tool`
+- A `~/.gitconfig.local` file for your name/email and any per-machine overrides
+- Helpful aliases (`promote`, `wtf`, etc.) — see `git/gitconfig.symlink`
 
-In the process of symlinking files, we first check if they exist in our target location. If this is the first time running this script, select `[b]ackup` (typing the lowercase-b) or `[B]ackup all` (typing the uppercase-b). Once files are symlinked you will not be prompted to repeat this.
+### CLI tools
+- `git`, `gh` (GitHub CLI), `curl`, `wget`, `tree`, `tldr`, `jq`, `ripgrep`, `fd`, `shellcheck`, `zsh-syntax-highlighting`
+- **Node.js** + **npm** from apt (Linux) or brew (macOS) — for global CLIs only; project Node lives in Docker
+- **Claude Code** (`@anthropic-ai/claude-code`) via npm
+- **Docker Engine** + Compose v2 (Linux: official apt repo; macOS: Docker Desktop)
+- **1Password CLI** (`op`) with the SSH agent integration
 
-### Why is the installer asking for my computer password?
+### GUI apps
 
-One of the first steps the installation script takes is to ensure your system software is up to date. This command requires that you input your computer password into your terminal. When you type your password, no characters will be displayed. This is normal. Just hit enter after you've typed it in!
+| App | macOS | Linux |
+|---|:-:|:-:|
+| **PhpStorm** (default IDE) | Toolbox | Toolbox |
+| 1Password + 1Password CLI | brew | apt (official repo, **not snap**) |
+| Google Chrome | brew | apt (official repo) |
+| Slack | brew | snap |
+| Zoom | brew | vendor `.deb` |
+| Spotify | brew | apt (official repo) |
+| Obsidian | brew | snap |
+| Postman | brew | snap |
+| Docker | Desktop | Engine |
+| iTerm2 | brew | — (use GNOME Terminal) |
+| Rectangle / Kap / QuickLook plugins | brew | — (macOS-only) |
 
-### Is it OK to run the installer more than once?
+> [!IMPORTANT]
+> **Don't install 1Password from snap.** The snap build is sandboxed and breaks the SSH agent socket. The repo's `1password/install.sh` uses the official apt repo and detects an existing snap install to warn you.
 
-Yes. A great example of this is after your system software is updated. Just go back into the Terminal, and start at step 2 of the installation instructions. There's no need to re-clone this repository.
+## Philosophy
 
-# Post-Installation
+This repo gives you a **stable, reproducible base shell + tooling environment**, nothing more. The opinions are:
 
-There are some things that this script can't do automatically (yet). For convenience we've listed them out below.
+1. **Language runtimes live in Docker.** PHP, MySQL, Postgres, Python, Ruby — none of them are installed system-wide. Each project ships its own container. Node + npm are the only host runtimes, and only because global CLIs need them.
+2. **One IDE.** PhpStorm is the canonical editor. Git uses it for diffs, merges, and commit messages.
+3. **macOS and Linux at parity where it matters.** The same `.zshrc`, the same `.gitconfig`, the same `dot update` workflow. Differences are isolated to per-OS topic installers.
+4. **Opt-in, not opt-out.** New apps are explicit additions (`Aptfile`, `Brewfile`, or a `<topic>/install.sh`). No surprise installs.
 
-## Opening apps for the first time
+## Day-to-day: `dot` commands
 
-Many newly downloaded applications will prompt you with a security setting when you open them the first time. This is expected. [Read the docs](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) for more information.
+After the first install, `bin/dot` is the maintenance entry point:
 
-## Selecting an iTerm2 theme
-- A default iTerm theme was installed by this script. You will need to select it in the iTerm preferences pane. In the application menu bar go to `iTerm2 -> Preferences -> Profiles` and select `Dotfiles Default`.
+```sh
+dot              # same as `dot install`
+dot install      # re-run all installers (idempotent)
+dot update       # git pull, install, then upgrade brew/apt + oh-my-zsh
+dot edit         # open ~/.dotfiles in PhpStorm
+dot help         # show usage
+```
 
-## Recommended Google Chrome Extensions
-- [1Password - Password Manager](https://chrome.google.com/webstore/detail/1password-%E2%80%93-password-mana/aeblfdkhhhdcdjpifhhbdiojplfjncoa) - Easily sign in to sites, generate passwords, and store secure information.
-- [Snowplow Analytics Debugger](https://chrome.google.com/webstore/detail/snowplow-analytics-debugg/jbnlcgeengmijcghameodeaenefieedm) - Debug your Snowplow Analytics implementation.
-- [Tag Assistant Companion](https://chrome.google.com/webstore/detail/tag-assistant-companion/jmekfmbnaedfebfnmakmokmlfpblbfdm) - Works with Tag Assistant to help troubleshoot installation of gtag.js and Google Tag Manager.
-- [Droplr](https://chrome.google.com/webstore/detail/screenshot-screen-recorde/oncaapliomaamlbopdmhmdompfemljhm) - Capture screenshots and screen recordings instantly.
-- [Tab Modifier](https://chrome.google.com/webstore/detail/tab-modifier/hcbgadmbdkiilgpifjgcakjehmafcjai) - Automate your tabs, rename tabs based on rules.
-- [OneTab](https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall?hl=en) - Save up to 95% memory and reduce tab clutter.
-- [Spectrum](https://chrome.google.com/webstore/detail/spectrum/ofclemegkcmilinpcimpjkfhjfgmhieb) - Instantly test your web page with different types of color vision deficiency.
-- [TestRail Helper](https://chrome.google.com/webstore/detail/testrail-helper/bomfcmedmmolncpeaaikehdgcccjllaf?hl=en) - Expands all Actual Results and can add a comment with expected details.
-- [Check My Links](https://chrome.google.com/webstore/detail/check-my-links/ojkcdipcgfaekbeaelaapakgnjflfglf) - Crawls through your webpage and looks for broken links.
-- [Ranorex Selocity](https://chrome.google.com/webstore/detail/ranorex-selocity/ocgghcnnjekfpbmafindjmijdpopafoe) - Rapidly generate selectors for use in automation
-- [BugMagnet](https://chrome.google.com/webstore/detail/bug-magnet/efhedldbjahpgjcneebmbolkalbhckfi) - Exploratory testing assistant. Open source and customizable.
-- [FakeFiller](https://chrome.google.com/webstore/detail/fake-filler/bnjjngeaknajbdcgpfkgnonkmififhfo) - A form filler that fills all inputs on a page with fake/dummy data.
+`dot update` is the one to run weekly: it `git pull --rebase --autostash`'s the repo, re-runs every topic installer (so new tools you add show up automatically), then upgrades system packages.
 
-## Frequently Asked Post-Installation Questions
+## Customization
 
-### What can I change?
+### Per-machine config: `~/.localrc`
 
-After installation anything you want to change or tweak will be done in `~/.dotfiles`. Because that directory originated as a Git repository, everything is nicely version controlled. However, you should really consider forking this parent repository to ensure that you can version your own changes!
+Anything you don't want committed to a public dotfiles repo — work credentials, API tokens, machine-specific `$PATH` entries, hostname-specific aliases — goes in `~/.localrc`. It's sourced at the very top of `~/.zshrc`, before any topic config.
 
-# Customizing and extending dotfiles
+See [`zsh/localrc.example`](zsh/localrc.example) for the canonical patterns:
 
-Dotfiles are very much meant for customization. If you plan to customize these settings to your personal liking, I suggest first forking the repository, then cloning that new repository into your home directory. This approach gives you more flexibility while still offering the ability to merge in changes from upstream.
+```sh
+# Pull secrets from 1Password at shell-start time, never touching disk
+export GITHUB_TOKEN="$(op read 'op://Private/GitHub/token')"
 
-## Topical Structure
+# Hostname-specific tweaks
+case "$(hostname -s)" in
+  work-laptop)  export AWS_PROFILE=work ;;
+  home-desktop) export AWS_PROFILE=personal ;;
+esac
+```
 
-Everything's built around topic areas. If you're adding a new area to your forked dotfiles — say, "node" — you can simply add a `node` directory and put files in there. Anything with an extension of `.zsh` will get automatically included into your shell. Anything with an extension of `.symlink` will get symlinked without extension into `$HOME` when you run `script/bootstrap`.
+The `1password/functions.zsh` file also exposes two helpers (gated on `op` being on `$PATH`):
 
-## What's inside
+```sh
+op_export GITHUB_TOKEN "op://Private/GitHub/token"   # silently no-ops if not signed in
+with-op ~/.config/op/work.env -- terraform plan      # `op run` wrapper
+```
 
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser above and see what components may mesh up with you. The best place to start is probably [the Brewfile](https://github.com/philipdowner/dotfiles/blob/master/Brewfile). [Fork this repo](https://github.com/philipdowner/dotfiles/fork), remove what you don't use, and build on what you do use.
+### Signing git commits with the 1Password SSH agent
 
-## Components
+The `1password/install.sh` topic enables the SSH agent. You can use the same key to sign your git commits without ever exporting it. Add this to `~/.gitconfig.local`:
 
-There's a few special files in the hierarchy.
+```ini
+[user]
+    signingkey = ssh-ed25519 AAAAC3Nza...your public key...
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"   # macOS
+    # program = "/opt/1Password/op-ssh-sign"                              # Linux
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
+```
 
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded last and is expected to setup autocomplete.
-- **topic/install.sh**: Any file named `install.sh` is executed when you run `script/install`. To avoid being loaded automatically, its extension is `.sh`, not `.zsh`.
-- **topic/\*.symlink**: Any file ending in `*.symlink` gets symlinked into your `$HOME`. This is so you can keep all of those versioned in your dotfiles but still keep those autoloaded files in your home directory. These get symlinked in when you run `script/bootstrap`.
+GitHub will mark your commits as **Verified** with no extra agents and no on-disk private key.
 
-## Bugs
+### Profiling shell startup
 
-I want this to work for everyone. If you run into any blockers, please open an issue on this repository and I'll work to get it fixed for you!
+If your shell starts to feel slow:
 
-# Errata and To-Do's
+```sh
+ZSH_PROFILE=1 zsh -ic exit
+```
 
-## @TODO
-- [ ] Figure out how to make MacOS text substitution portable. Consider aText as alternative to the failing build for shortcuts. `brew 'rodionovd/taps/shortcuts'             # https://github.com/rodionovd/shortcuts - A CLI manager for your text replacements on macOS`
-- [ ] [Add login message](https://github.com/MikeMcQuaid/strap/blob/master/bin/strap.sh#L218) for lost Mac.
-- [ ] Instead of running MacOS `[softwareupdate](https://ss64.com/osx/softwareupdate.html)` as part [of this script](./macos/install.sh), consider failing (or hard warning) if updates exist at instantiation. This should avoid hung installs due to long-running system software updates. At minimum run this command before brewing to ensure access to Command Line Tools for Xcode.
-- [ ] Check if iTerm2 profile can be sourced from `$DOTFILES` with ability to customize locally.
-- [ ] Detail P10K configuration in docs.
-- [ ] Programatically setup the MacOS doc with preferred apps. [Apple Docs](https://developer.apple.com/documentation/devicemanagement/dock) and [StackOverflow](https://stackoverflow.com/questions/67026378/customize-macoss-dock-with-a-bash-script)
-- [ ] Consider replacing/aliasing `tree` to [broot](https://dystroy.org/broot/)
-- [x] Better git difftool like [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
-- [x] Add CodeOwners file
-- [x] [Install VS Code extensions programatically](https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line)
-- [x] Setup a sane [editorConfig file](https://editorconfig.org/)
+This loads `zsh/zprof` and prints a per-function timing report at the end of zshrc. Use the `lazy_load` helper in [`system/lazy.zsh`](system/lazy.zsh) to defer slow initializers (`nvm`, `pyenv`, `direnv`, etc.) until first use.
 
-## Browser Extensions
+## How it works
 
-- Installing Chrome extensions [appears possible](https://support.google.com/chrome/a/answer/187948?visit_id=637892850139741739-4179064981&rd=1), but a PIA.
+### Topic structure
+
+Everything is organized by topic — one directory per tool. To add a new topic, just `mkdir node` and drop files in:
+
+| Filename | What it does |
+|---|---|
+| `topic/path.zsh` | Sourced **first**. Set `$PATH` and friends here. |
+| `topic/*.zsh` | Sourced in the middle. Aliases, functions, env vars, prompts. |
+| `topic/completion.zsh` | Sourced **last**, after `compinit`. Use for completion definitions. |
+| `topic/install.sh` | Run by `script/install` (and `dot install`). Idempotent installer for the tool. |
+| `topic/*.symlink` | Symlinked into `$HOME` as `~/.<basename>` by `script/bootstrap`. |
+| `bin/*` | Anything in `bin/` is added to `$PATH`. |
+
+Per-OS installers should self-skip with a `[ "$(uname -s)" = "Linux" ] || exit 0` (or equivalent) at the top so they're safe to include in the global install loop on the wrong OS.
+
+### Bootstrap flow
+
+```
+script/bootstrap
+├── prompt for git name/email → ~/.gitconfig.local
+├── symlink */*.symlink → ~ (timestamped backups for anything pre-existing)
+└── bin/dot install
+    ├── macOS:  macos/set-defaults.sh, homebrew/install.sh, brew update
+    ├── Linux:  linux/set-defaults.sh, linux/install.sh (apt + Aptfile)
+    └── script/install   # runs every topic */install.sh + Brewfile on macOS
+```
+
+### Adding apps
+
+- **CLI tool available in your distro's repos:** add it to [`linux/Aptfile`](linux/Aptfile) and/or [`Brewfile`](Brewfile), then `dot install`.
+- **Anything else (vendor apt repo, snap, .deb, tarball):** create a new topic dir with an `install.sh` that follows the pattern in `chrome/`, `1password/`, `docker/`, etc.
+
+## Post-install steps
+
+A few things the installer can't fully automate.
+
+### macOS
+
+- **PhpStorm:** Install via [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/). In Toolbox settings, enable "Generate shell scripts" so the `phpstorm` launcher ends up on your `$PATH`. (Or in PhpStorm: *Tools → Create Command-line Launcher*.)
+- **iTerm2 theme:** *iTerm2 → Settings → Profiles* and pick `Dotfiles Default`.
+- **Open new apps once:** macOS will prompt for security confirmation the first time you launch any non-App-Store app — this is expected.
+
+### Linux (Ubuntu/Debian)
+
+- **PhpStorm:** Install via [JetBrains Toolbox](https://www.jetbrains.com/toolbox-app/). Enable "Generate shell scripts" in Toolbox settings (target `~/.local/bin`). The `phpstorm/install.sh` topic will detect it and symlink the launcher if Toolbox didn't.
+- **Log out and back in** after the first install so:
+  - your shell switches to zsh, and
+  - your user picks up `docker` group membership
+- **GNOME Terminal font:** *Preferences → your profile → Custom font*. Pick whichever monospace font you prefer.
+- **1Password SSH agent:** Open 1Password → *Settings → Developer → Use the SSH agent*. The `1password/env.zsh` file will export `SSH_AUTH_SOCK` for you on next shell start.
+
+## FAQ
+
+### Is it safe to run on a machine I've already configured?
+
+Yes. Anything pre-existing at a symlink target is moved to `~/.dotfiles-backup/<timestamp>/<original/path>` before being replaced. Restore with `cp -a ~/.dotfiles-backup/<timestamp>/. /`.
+
+### What does it install on a fresh box?
+
+See [What you get](#what-you-get). The Linux installers default to a lean set of base tools — you can extend by editing [`linux/Aptfile`](linux/Aptfile). The macOS Brewfile is broader because brew handles GUI apps too.
+
+### Why is the installer asking for my password?
+
+Several installers (`apt`, system `defaults`, `chsh`) need root. They're prompted via `sudo`; no characters appear as you type — just hit enter.
+
+### Can I run the installer more than once?
+
+Yes — that's exactly what `dot install` and `dot update` do. Every topic installer is idempotent and skips work that's already done.
+
+### How do I customize without forking?
+
+- For **secrets and per-machine env vars**, use `~/.localrc` (see [Customization](#customization)).
+- For **git author info** and any local git config, edit `~/.gitconfig.local`.
+- For **bigger changes** — adding/removing topics, changing the Brewfile or Aptfile — fork the repo so you can pull upstream changes later.
+
+### Something broke — where do I report it?
+
+[Open an issue](https://github.com/philipdowner/dotfiles/issues) on the repo.

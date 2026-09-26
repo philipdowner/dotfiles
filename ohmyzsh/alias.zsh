@@ -1,2 +1,2 @@
 #OhMyZSH
-alias ohmyzsh="code ~/.oh-my-zsh"
+alias ohmyzsh="phpstorm ~/.oh-my-zsh"
