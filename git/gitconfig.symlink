@@ -23,7 +23,7 @@
 [difftool]
         prompt = false
 [difftool "storm"]
-        cmd = /usr/local/bin/storm diff "$LOCAL" "$REMOTE"
+        cmd = /Applications/PhpStorm.app/Contents/MacOS/phpstorm diff "$LOCAL" "$REMOTE"
 [help]
         autocorrect = 1
 [hub]
@@ -39,7 +39,8 @@
 [mergetool]
         keepBackup = false
 [mergetool "storm"]
-        cmd = /usr/local/bin/storm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+        cmd = /Applications/PhpStorm.app/Contents/MacOS/phpstorm merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+        trustExitCode = true
 [push]
         default = simple
         autoSetupRemote = true
