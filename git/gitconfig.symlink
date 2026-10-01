@@ -29,8 +29,6 @@
 [hub]
         protocol = ssh
         editor = "phpstorm --wait"
-[include]
-        path = ~/.gitconfig.local
 [interactive]
         diffFilter = delta --color-only
 [merge]
@@ -45,8 +43,6 @@
 [push]
         default = simple
         autoSetupRemote = true
-[credential]
-	helper = osxkeychain
 [alias]
     # DOTFILES Functions
     promote = !$DOTFILES/bin/git-promote
@@ -121,3 +117,7 @@
 
 [commit]
   gpgsign = true
+
+# Per-machine settings. Included last so they override anything above.
+[include]
+        path = ~/.gitconfig.local
