@@ -22,7 +22,7 @@ tree
 jq
 ripgrep
 fd-find
-tldr
+tealdeer
 shellcheck
 xclip
 git-delta
