@@ -43,8 +43,6 @@
 [push]
         default = simple
         autoSetupRemote = true
-[credential]
-	helper = osxkeychain
 [alias]
     # DOTFILES Functions
     promote = !$DOTFILES/bin/git-promote
